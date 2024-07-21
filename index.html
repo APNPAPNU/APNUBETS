@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        function redirectToDateSpecificPage() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+            const day = String(today.getDate()).padStart(2, '0');
+
+            const dateStr = `${year}-${month}-${day}`;
+            const url = `index-${dateStr}.html`;
+
+            window.location.href = url;
+        }
+
+        window.onload = redirectToDateSpecificPage;
+    </script>
+</head>
+<body>
+    <p>Redirecting to today's page...</p>
+</body>
+</html>
