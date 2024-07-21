@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <style>
         body {
             background: linear-gradient(to right, #4A90E2, #50E3C2); /* New gradient background */
@@ -30,11 +30,12 @@
             color: #ffffff; /* Text color to stand out against the gradient */
             margin-top: 20px;
         }
-        input[type="text"], select, input[type="date"] {
+        input[type="text"], select {
             margin: 10px;
-            padding: 10px; /* Increased padding */
+            padding: 10px; /* Increased padding for better touch experience */
             border: 1px solid #ccc;
             border-radius: 4px; /* Rounded corners */
+            width: calc(100% - 22px); /* Full width with padding adjustment */
         }
         #calendar {
             margin: 20px auto;
@@ -48,18 +49,18 @@
 <h2 class="centered-heading">MLB PREDICTIONS<br>2024-07-21</h2>
 <label for="columnSelect">Select column to search:</label>
 <select id="columnSelect">
-    <option value="1">NNPlayer Name</option>
-    <option value="2">Key</option>
-    <option value="3">battingOrder</option>
-    <option value="4">predicted_probability</option>
-    <option value="5">predicted_hits_binary</option>
-    <option value="6">NNpredicted_class</option>
-    <option value="7">AI2predicted_probability</option>
-    <option value="8">AI2predicted_hits_binary</option>
-    <option value="9">AI3predicted_probability</option>
-    <option value="10">AI3predicted_hits_binary</option>
-    <option value="11">AI4predicted_probability</option>
-    <option value="12">AI4predicted_hits_binary</option>
+    <option value="0">NNPlayer Name</option>
+    <option value="1">Key</option>
+    <option value="2">battingOrder</option>
+    <option value="3">predicted_probability</option>
+    <option value="4">predicted_hits_binary</option>
+    <option value="5">NNpredicted_class</option>
+    <option value="6">AI2predicted_probability</option>
+    <option value="7">AI2predicted_hits_binary</option>
+    <option value="8">AI3predicted_probability</option>
+    <option value="9">AI3predicted_hits_binary</option>
+    <option value="10">AI4predicted_probability</option>
+    <option value="11">AI4predicted_hits_binary</option>
 </select>
 <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Search...">
 <label for="datePicker">Select date:</label>
@@ -3782,7 +3783,7 @@
   </tbody>
 </table>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.min.js"></script>
 <script>
 function filterTable() {
     var input, filter, table, tr, td, i, j, txtValue, columnIndex;
@@ -3812,12 +3813,17 @@ function filterTable() {
     }
 }
 
-flatpickr("#datePicker", {
-    onChange: function(selectedDates, dateStr, instance) {
-        var formattedDate = new Date(dateStr).toISOString().split('T')[0]; // YYYY-MM-DD format
+var picker = new Pikaday({
+    field: document.getElementById('datePicker'),
+    format: 'YYYY-MM-DD',
+    onSelect: function(date) {
+        var formattedDate = date.toISOString().split('T')[0]; // YYYY-MM-DD format
         var baseUrl = "https://apnpapnu.github.io/APNUBETS/"; // Replace with your base URL
         window.location.href = baseUrl + formattedDate + ".html"; // Redirect to the new URL
-    }
+    },
+    showDaysInNextAndPreviousMonths: true,
+    minDate: new Date(2020, 0, 1), // Set a minimum date to avoid selecting dates too far in the past
+    maxDate: new Date(2024, 11, 31) // Set a maximum date to avoid selecting future dates
 });
 </script>
 
