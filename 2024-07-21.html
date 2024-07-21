@@ -2,52 +2,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
-    <style>
-        body {
-            background: linear-gradient(to right, #4A90E2, #50E3C2); /* New gradient background */
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            background-color: #ffffff; /* Table background color to ensure readability */
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        span {
-            padding: 2px 5px;
-            font-weight: bold;
-        }
-        .centered-heading {
-            text-align: center;
-            color: #ffffff; /* Text color to stand out against the gradient */
-            margin-top: 20px;
-        }
-        input[type="text"], select {
-            margin: 10px;
-            padding: 10px; /* Increased padding for better touch experience */
-            border: 1px solid #ccc;
-            border-radius: 4px; /* Rounded corners */
-            width: calc(100% - 22px); /* Full width with padding adjustment */
-        }
-        #calendar {
-            margin: 20px auto;
-            width: 80%;
-            max-width: 800px;
-        }
-    </style>
+<style>
+body {
+    background: linear-gradient(to right, #4A90E2, #50E3C2); /* Gradient background */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #ffffff; /* Table background color to ensure readability */
+    margin-top: 20px;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+span {
+    padding: 2px 5px;
+    font-weight: bold;
+}
+.centered-heading {
+    text-align: center;
+    color: #ffffff; /* Text color to stand out against the gradient */
+    margin-top: 20px;
+}
+input[type="date"], input[type="text"], select {
+    margin: 10px;
+    padding: 5px;
+}
+button.styled-button {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 7px 16px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 12px; /* Set font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px; /* Rounded corners */
+}
+iframe {
+    width: 100%;
+    height: 300px; /* Adjust height as needed */
+    border: 1px solid #ccc; /* Optional border */
+}
+</style>
 </head>
 <body>
 
 <h2 class="centered-heading">MLB PREDICTIONS<br>2024-07-21</h2>
-<label for="columnSelect">Select column to search:</label>
+<label for="datePicker" style="color: white;">Select date:</label>
+<input type="date" id="datePicker" value="2024-07-21" onchange="navigateToDate()">
+<label for="columnSelect" style="color: white;">Select column to search:</label>
 <select id="columnSelect">
     <option value="0">NNPlayer Name</option>
     <option value="1">Key</option>
@@ -63,8 +74,9 @@
     <option value="11">AI4predicted_hits_binary</option>
 </select>
 <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Search...">
-<label for="datePicker">Select date:</label>
-<input type="text" id="datePicker" placeholder="Select date">
+
+<button class="styled-button" onclick="openIframe()">Open Details</button>
+<iframe id="detailsIframe" style="display:none;"></iframe>
 
 <table border="1" class="dataframe" id="myTable">
   <thead>
@@ -3783,10 +3795,9 @@
   </tbody>
 </table>
 
-<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.min.js"></script>
 <script>
 function filterTable() {
-    var input, filter, table, tr, td, i, j, txtValue, columnIndex;
+    var input, filter, table, tr, td, i, txtValue, columnIndex;
     input = document.getElementById("myInput");
     filter = input.value;
     table = document.getElementById("myTable");
@@ -3795,36 +3806,30 @@ function filterTable() {
 
     for (i = 1; i < tr.length; i++) {
         tr[i].style.display = "none";
-        td = tr[i].getElementsByTagName("td");
-        if (td[columnIndex]) {
-            txtValue = td[columnIndex].textContent || td[columnIndex].innerText;
-            if (!isNaN(txtValue) && !isNaN(filter)) {
-                // Numeric comparison
-                if (parseFloat(txtValue) >= parseFloat(filter)) {
-                    tr[i].style.display = "";
-                }
-            } else {
-                // Regular string comparison
-                if (txtValue.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
-                    tr[i].style.display = "";
-                }
+        td = tr[i].getElementsByTagName("td")[columnIndex];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
+                tr[i].style.display = "";
             }
         }
     }
 }
 
-var picker = new Pikaday({
-    field: document.getElementById('datePicker'),
-    format: 'YYYY-MM-DD',
-    onSelect: function(date) {
-        var formattedDate = date.toISOString().split('T')[0]; // YYYY-MM-DD format
-        var baseUrl = "https://apnpapnu.github.io/APNUBETS/"; // Replace with your base URL
-        window.location.href = baseUrl + formattedDate + ".html"; // Redirect to the new URL
-    },
-    showDaysInNextAndPreviousMonths: true,
-    minDate: new Date(2020, 0, 1), // Set a minimum date to avoid selecting dates too far in the past
-    maxDate: new Date(2024, 11, 31) // Set a maximum date to avoid selecting future dates
-});
+function navigateToDate() {
+    var dateInput, selectedDate, formattedDate;
+    dateInput = document.getElementById("datePicker");
+    selectedDate = new Date(dateInput.value);
+    formattedDate = selectedDate.toISOString().split('T')[0]; // YYYY-MM-DD format
+    var baseUrl = "https://apnpapnu.github.io/APNUBETS/"; // Replace with your base URL
+    window.location.href = baseUrl + formattedDate + ".html"; // Redirect to the new URL
+}
+
+function openIframe() {
+    var iframe = document.getElementById("detailsIframe");
+    iframe.style.display = iframe.style.display === "none" ? "block" : "none";
+    iframe.src = "https://apnpapnu.github.io/APNUBETS/Accuracy_2024-07-20.html"; // Replace with your URL or dynamic content source
+}
 </script>
 
 </body>
