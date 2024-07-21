@@ -3827,8 +3827,12 @@ function navigateToDate() {
 
 function openIframe() {
     var iframe = document.getElementById("detailsIframe");
+    var today = new Date();
+    var yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+    var formattedDate = yesterday.toISOString().split('T')[0]; // YYYY-MM-DD format
+    iframe.src = "https://apnpapnu.github.io/APNUBETS/Accuracy_" + formattedDate + ".html"; // Replace with your URL or dynamic content source
     iframe.style.display = iframe.style.display === "none" ? "block" : "none";
-    iframe.src = "https://apnpapnu.github.io/APNUBETS/Accuracy_2024-07-20.html"; // Replace with your URL or dynamic content source
 }
 </script>
 
