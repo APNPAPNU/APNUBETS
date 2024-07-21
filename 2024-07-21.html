@@ -31,7 +31,9 @@ span {
 }
 input[type="text"], select, input[type="date"] {
     margin: 10px;
-    padding: 5px;
+    padding: 10px; /* Increased padding */
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Rounded corners */
 }
 #calendar {
     margin: 20px auto;
@@ -60,7 +62,7 @@ input[type="text"], select, input[type="date"] {
 </select>
 <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Search...">
 <label for="datePicker">Select date:</label>
-<input type="date" id="datePicker" onchange="navigateToDate()">
+<input type="date" id="datePicker" onchange="navigateToDate()" style="width: 100%; box-sizing: border-box;">
 
 <table border="1" class="dataframe" id="myTable">
   <thead>
