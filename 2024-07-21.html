@@ -2,45 +2,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-body {
-    background: linear-gradient(to right, #4A90E2, #50E3C2); /* New gradient background */
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-table {
-    border-collapse: collapse;
-    width: 100%;
-    background-color: #ffffff; /* Table background color to ensure readability */
-    margin-top: 20px;
-}
-th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-span {
-    padding: 2px 5px;
-    font-weight: bold;
-}
-.centered-heading {
-    text-align: center;
-    color: #ffffff; /* Text color to stand out against the gradient */
-    margin-top: 20px;
-}
-input[type="text"], select, input[type="date"] {
-    margin: 10px;
-    padding: 10px; /* Increased padding */
-    border: 1px solid #ccc;
-    border-radius: 4px; /* Rounded corners */
-}
-#calendar {
-    margin: 20px auto;
-    width: 80%;
-    max-width: 800px;
-}
-</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #4A90E2, #50E3C2); /* New gradient background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #ffffff; /* Table background color to ensure readability */
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        span {
+            padding: 2px 5px;
+            font-weight: bold;
+        }
+        .centered-heading {
+            text-align: center;
+            color: #ffffff; /* Text color to stand out against the gradient */
+            margin-top: 20px;
+        }
+        input[type="text"], select, input[type="date"] {
+            margin: 10px;
+            padding: 10px; /* Increased padding */
+            border: 1px solid #ccc;
+            border-radius: 4px; /* Rounded corners */
+        }
+        #calendar {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+        }
+    </style>
 </head>
 <body>
 
@@ -62,7 +63,7 @@ input[type="text"], select, input[type="date"] {
 </select>
 <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Search...">
 <label for="datePicker">Select date:</label>
-<input type="date" id="datePicker" onchange="navigateToDate()" style="width: 100%; box-sizing: border-box;">
+<input type="text" id="datePicker" placeholder="Select date">
 
 <table border="1" class="dataframe" id="myTable">
   <thead>
@@ -3781,6 +3782,7 @@ input[type="text"], select, input[type="date"] {
   </tbody>
 </table>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
 function filterTable() {
     var input, filter, table, tr, td, i, j, txtValue, columnIndex;
@@ -3810,14 +3812,13 @@ function filterTable() {
     }
 }
 
-function navigateToDate() {
-    var dateInput, selectedDate, formattedDate;
-    dateInput = document.getElementById("datePicker");
-    selectedDate = new Date(dateInput.value);
-    formattedDate = selectedDate.toISOString().split('T')[0]; // YYYY-MM-DD format
-    var baseUrl = "https://apnpapnu.github.io/APNUBETS/"; // Replace with your base URL
-    window.location.href = baseUrl + formattedDate + ".html"; // Redirect to the new URL
-}
+flatpickr("#datePicker", {
+    onChange: function(selectedDates, dateStr, instance) {
+        var formattedDate = new Date(dateStr).toISOString().split('T')[0]; // YYYY-MM-DD format
+        var baseUrl = "https://apnpapnu.github.io/APNUBETS/"; // Replace with your base URL
+        window.location.href = baseUrl + formattedDate + ".html"; // Redirect to the new URL
+    }
+});
 </script>
 
 </body>
