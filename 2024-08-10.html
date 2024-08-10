@@ -79,7 +79,6 @@ iframe {
 
 <button class="styled-button" onclick="openIframe()">Open Details</button>
 <iframe id="detailsIframe" style="display:none;"></iframe>
-
 <table border="1" class="dataframe" id="myTable">
   <thead>
     <tr style="text-align: right;">
@@ -3362,15 +3361,6 @@ function openIframe() {
     var today = new Date();
     var yesterday = new Date(today);
     yesterday.setDate(today.getDate() - 1);
-    var formattedDate = yesterday.toISOString().split('T')[0]; // YYYY-MM-DD format
-    iframe.src = "https://apnpapnu.github.io/APNUBETS/Accuracy_" + formattedDate + ".html"; // Replace with your URL or dynamic content source
-    iframe.style.display = iframe.style.display === "none" ? "block" : "none";
-}
-function openIframe() {
-    var iframe = document.getElementById("WINSIframe");
-    var today = new Date();
-    var yesterday = new Date(today);
-    yesterday.setDate(today.getDate() - 0);
     var formattedDate = yesterday.toISOString().split('T')[0]; // YYYY-MM-DD format
     iframe.src = "https://apnpapnu.github.io/APNUBETS/Accuracy_" + formattedDate + ".html"; // Replace with your URL or dynamic content source
     iframe.style.display = iframe.style.display === "none" ? "block" : "none";
