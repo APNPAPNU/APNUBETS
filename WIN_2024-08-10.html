@@ -1,0 +1,152 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CSV to HTML Table</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                color: #333;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 80%;
+                margin: 20px auto;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                background-color: #fff;
+                border: 1px solid #ddd;
+            }
+            th, td {
+                padding: 10px;
+                text-align: center;
+                border: 1px solid #ddd;
+            }
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            caption {
+                padding: 10px;
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <table class="dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th>parentTeamId</th>
+      <th>predictions_x</th>
+      <th>predicted_probabilities_x</th>
+      <th>parentTeamId_P1</th>
+      <th>predictions_y</th>
+      <th>predicted_probabilities_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ARI</td>
+      <td>0.5</td>
+      <td>0.513</td>
+      <td>ARI</td>
+      <td>0.500</td>
+      <td>0.513</td>
+    </tr>
+    <tr>
+      <td>BAL</td>
+      <td>1.0</td>
+      <td>0.720</td>
+      <td>TB</td>
+      <td>0.000</td>
+      <td>0.367</td>
+    </tr>
+    <tr>
+      <td>BOS</td>
+      <td>1.0</td>
+      <td>0.716</td>
+      <td>HOU</td>
+      <td>0.889</td>
+      <td>0.530</td>
+    </tr>
+    <tr>
+      <td>CHW</td>
+      <td>0.5</td>
+      <td>0.552</td>
+      <td>CHW</td>
+      <td>0.500</td>
+      <td>0.552</td>
+    </tr>
+    <tr>
+      <td>CLE</td>
+      <td>1.0</td>
+      <td>0.607</td>
+      <td>MIN</td>
+      <td>0.000</td>
+      <td>0.313</td>
+    </tr>
+    <tr>
+      <td>DET</td>
+      <td>0.0</td>
+      <td>0.299</td>
+      <td>SF</td>
+      <td>1.000</td>
+      <td>0.531</td>
+    </tr>
+    <tr>
+      <td>KC</td>
+      <td>0.0</td>
+      <td>0.198</td>
+      <td>STL</td>
+      <td>0.000</td>
+      <td>0.341</td>
+    </tr>
+    <tr>
+      <td>LAA</td>
+      <td>1.0</td>
+      <td>0.640</td>
+      <td>WSH</td>
+      <td>1.000</td>
+      <td>0.605</td>
+    </tr>
+    <tr>
+      <td>MIA</td>
+      <td>1.0</td>
+      <td>0.624</td>
+      <td>SD</td>
+      <td>0.111</td>
+      <td>0.496</td>
+    </tr>
+    <tr>
+      <td>NYY</td>
+      <td>0.0</td>
+      <td>0.424</td>
+      <td>TEX</td>
+      <td>0.000</td>
+      <td>0.356</td>
+    </tr>
+    <tr>
+      <td>OAK</td>
+      <td>1.0</td>
+      <td>0.798</td>
+      <td>TOR</td>
+      <td>0.000</td>
+      <td>0.353</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </body>
+    </html>
+    
