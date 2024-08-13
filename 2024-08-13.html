@@ -1,0 +1,3193 @@
+
+<!DOCTYPE html>
+<html>
+<head><head>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<style>
+body {
+    background: linear-gradient(to right, #4A90E2, #50E3C2); /* Gradient background */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #ffffff; /* Table background color to ensure readability */
+    margin-top: 20px;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+span {
+    padding: 2px 5px;
+    font-weight: bold;
+}
+.centered-heading {
+    text-align: center;
+    color: #ffffff; /* Text color to stand out against the gradient */
+    margin-top: 20px;
+}
+input[type="date"], input[type="text"], select {
+    margin: 10px;
+    padding: 5px;
+}
+ .button {
+            background-color: #28a745; /* Green background */
+            border: none; /* Remove default border */
+            color: white; /* White text */
+            padding: 15px 30px; /* Add some padding */
+            text-align: center; /* Center the text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Make it inline-block */
+            font-size: 16px; /* Set the font size */
+            font-weight: bold; /* Bold text */
+            margin: 4px 2px; /* Add some margin */
+            cursor: pointer; /* Add a pointer cursor on hover */
+            border-radius: 12px; /* Round the corners */
+            transition: background-color 0.3s ease; /* Smooth background color transition */
+        }
+
+button.styled-button {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 7px 16px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 12px; /* Set font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px; /* Rounded corners */
+}
+iframe {
+    width: 100%;
+    height: 300px; /* Adjust height as needed */
+    border: 1px solid #ccc; /* Optional border */
+}
+</style>
+</head>
+<body>
+
+<h2 class="centered-heading">MLB PREDICTIONS<br>2024-08-13</h2>
+<label for="datePicker" style="color: white;">Select date:</label>
+<input type="date" id="datePicker" value="2024-08-13" onchange="navigateToDate()">
+<label for="columnSelect" style="color: white;">Select column to search:</label>
+<select id="columnSelect">
+    <option value="0">NNPlayer Name</option>
+    <option value="1">TEAM</option>
+    <option value="2">battingOrder</option>
+    <option value="3">predicted_probability</option>
+    <option value="4">predicted_hits_binary</option>
+    <option value="5">NNpredicted_class</option>
+    <option value="6">batting_avg</option>
+    <option value="7">AI2predicted_hits_binary</option>
+    <option value="8">AI3predicted_probability</option>
+    <option value="9">AI3predicted_hits_binary</option>
+    <option value="10">AI4predicted_probability</option>
+    <option value="11">AI4predicted_hits_binary</option>
+</select>
+<input type="text" id="myInput" onkeyup="filterTable()" placeholder="Search...">
+
+<button class="styled-button" onclick="openIframe()">Open Details</button>
+<iframe id="detailsIframe" style="display:none;"></iframe>
+<a href="https://apnpapnu.github.io/APNUBETS/WIN_2024-08-13.html" class="button">CHECK WIN PREDICTIONS</a>
+<table border="1" class="dataframe" id="myTable">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>Team</th>
+      <th>Order</th>
+      <th>batting_avg</th>
+      <th>AI1</th>
+      <th>AI1 %</th>
+      <th>NN</th>
+      <th>NN %</th>
+      <th>AI2</th>
+      <th>AI3</th>
+      <th>AI3 %</th>
+      <th>AI4</th>
+      <th>AI4 %</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Anthony Santander</td>
+      <td><span style="background-color: #DF4601; color: white;">BAL</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.24</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,323,0);">0.73</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.112</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(250,0,0);">0.03</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,339,0);">0.67</span></td>
+    </tr>
+    <tr>
+      <td>Gunnar Henderson</td>
+      <td><span style="background-color: #DF4601; color: white;">BAL</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(210,0,0);">0.29</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,332,0);">0.69</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.688</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(252,0,0);">0.02</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,326,0);">0.72</span></td>
+    </tr>
+    <tr>
+      <td>Adley Rutschman</td>
+      <td><span style="background-color: #DF4601; color: white;">BAL</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.27</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,333,0);">0.69</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.404</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,318,0);">0.75</span></td>
+    </tr>
+    <tr>
+      <td>Ryan Mountcastle</td>
+      <td><span style="background-color: #DF4601; color: white;">BAL</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,337,0);">0.68</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.359</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,323,0);">0.73</span></td>
+    </tr>
+    <tr>
+      <td>Ramón Urías</td>
+      <td><span style="background-color: #DF4601; color: white;">BAL</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,375,0);">0.53</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.739</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(224,0,0);">0.20</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+    </tr>
+    <tr>
+      <td>Jackson Holliday</td>
+      <td><span style="background-color: #DF4601; color: white;">BAL</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(230,0,0);">0.16</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(182,0,0);">0.47</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.536</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(241,0,0);">0.09</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(193,0,0);">0.40</span></td>
+    </tr>
+    <tr>
+      <td>Colton Cowser</td>
+      <td><span style="background-color: #DF4601; color: white;">BAL</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,349,0);">0.63</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.972</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,354,0);">0.61</span></td>
+    </tr>
+    <tr>
+      <td>Ryan O'Hearn</td>
+      <td><span style="background-color: #DF4601; color: white;">BAL</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,342,0);">0.66</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(245,0,0);">0.06</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.808</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(252,0,0);">0.02</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,341,0);">0.66</span></td>
+    </tr>
+    <tr>
+      <td>Cedric Mullins</td>
+      <td><span style="background-color: #DF4601; color: white;">BAL</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(221,0,0);">0.22</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,344,0);">0.65</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.115</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,351,0);">0.62</span></td>
+    </tr>
+    <tr>
+      <td>Connor Wong</td>
+      <td><span style="background-color: #BD3039; color: white;">BOS</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(210,0,0);">0.29</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,377,0);">0.52</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,259,0);">0.98</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.753</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(192,0,0);">0.41</span></td>
+    </tr>
+    <tr>
+      <td>Rob Refsnyder</td>
+      <td><span style="background-color: #BD3039; color: white;">BOS</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(209,0,0);">0.30</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,368,0);">0.56</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.817</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(250,0,0);">0.03</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(195,0,0);">0.39</span></td>
+    </tr>
+    <tr>
+      <td>Wilyer Abreu</td>
+      <td><span style="background-color: #BD3039; color: white;">BOS</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,380,0);">0.51</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.926</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+    </tr>
+    <tr>
+      <td>Dominic Smith</td>
+      <td><span style="background-color: #BD3039; color: white;">BOS</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,370,0);">0.55</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.941</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,354,0);">0.61</span></td>
+    </tr>
+    <tr>
+      <td>David Hamilton</td>
+      <td><span style="background-color: #BD3039; color: white;">BOS</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.948</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,344,0);">0.65</span></td>
+    </tr>
+    <tr>
+      <td>Rafael Devers</td>
+      <td><span style="background-color: #BD3039; color: white;">BOS</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(209,0,0);">0.30</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,362,0);">0.58</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.516</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,326,0);">0.72</span></td>
+    </tr>
+    <tr>
+      <td>Nick Sogard</td>
+      <td><span style="background-color: #BD3039; color: white;">BOS</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(211,0,0);">0.28</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.452</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(209,0,0);">0.30</span></td>
+    </tr>
+    <tr>
+      <td>Ceddanne Rafaela</td>
+      <td><span style="background-color: #BD3039; color: white;">BOS</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(192,0,0);">0.41</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.926</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(204,0,0);">0.33</span></td>
+    </tr>
+    <tr>
+      <td>Masataka Yoshida</td>
+      <td><span style="background-color: #BD3039; color: white;">BOS</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(212,0,0);">0.28</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,344,0);">0.65</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,273,0);">0.93</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.862</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(234,0,0);">0.13</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,344,0);">0.65</span></td>
+    </tr>
+    <tr>
+      <td>Corey Julks</td>
+      <td><span style="background-color: #27251F; color: white;">CHW</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(200,0,0);">0.35</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.564</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(196,0,0);">0.38</span></td>
+    </tr>
+    <tr>
+      <td>Lenyn Sosa</td>
+      <td><span style="background-color: #27251F; color: white;">CHW</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(220,0,0);">0.22</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(184,0,0);">0.46</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(182,0,0);">0.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.092</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(252,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,369,0);">0.55</span></td>
+    </tr>
+    <tr>
+      <td>Korey Lee</td>
+      <td><span style="background-color: #27251F; color: white;">CHW</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(221,0,0);">0.22</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(205,0,0);">0.32</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.72</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(193,0,0);">0.40</span></td>
+    </tr>
+    <tr>
+      <td>Andrew Vaughn</td>
+      <td><span style="background-color: #27251F; color: white;">CHW</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(190,0,0);">0.42</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.901</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,351,0);">0.62</span></td>
+    </tr>
+    <tr>
+      <td>Brooks Baldwin</td>
+      <td><span style="background-color: #27251F; color: white;">CHW</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(222,0,0);">0.21</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(207,0,0);">0.31</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,309,0);">0.79</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.448</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+    </tr>
+    <tr>
+      <td>Gavin Sheets</td>
+      <td><span style="background-color: #27251F; color: white;">CHW</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(221,0,0);">0.22</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,370,0);">0.55</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,256,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.923</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+    </tr>
+    <tr>
+      <td>Andrew Benintendi</td>
+      <td><span style="background-color: #27251F; color: white;">CHW</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(222,0,0);">0.21</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(184,0,0);">0.46</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.876</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,382,0);">0.50</span></td>
+    </tr>
+    <tr>
+      <td>Luis Robert Jr.</td>
+      <td><span style="background-color: #27251F; color: white;">CHW</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(224,0,0);">0.20</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(206,0,0);">0.31</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.632</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(186,0,0);">0.45</span></td>
+    </tr>
+    <tr>
+      <td>Miguel Vargas</td>
+      <td><span style="background-color: #27251F; color: white;">CHW</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(226,0,0);">0.19</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(199,0,0);">0.37</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.672</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(196,0,0);">0.38</span></td>
+    </tr>
+    <tr>
+      <td>Elly De La Cruz</td>
+      <td><span style="background-color: #C6011F; color: white;">CIN</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,368,0);">0.56</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.988</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(192,0,0);">0.41</span></td>
+    </tr>
+    <tr>
+      <td>Jonathan India</td>
+      <td><span style="background-color: #C6011F; color: white;">CIN</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.25</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,345,0);">0.64</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.155</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,382,0);">0.50</span></td>
+    </tr>
+    <tr>
+      <td>Jake Fraley</td>
+      <td><span style="background-color: #C6011F; color: white;">CIN</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(212,0,0);">0.28</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,377,0);">0.52</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.044</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,369,0);">0.55</span></td>
+    </tr>
+    <tr>
+      <td>TJ Friedl</td>
+      <td><span style="background-color: #C6011F; color: white;">CIN</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(221,0,0);">0.22</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(186,0,0);">0.45</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.896</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,369,0);">0.55</span></td>
+    </tr>
+    <tr>
+      <td>Jeimer Candelario</td>
+      <td><span style="background-color: #C6011F; color: white;">CIN</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(182,0,0);">0.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.771</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(183,0,0);">0.47</span></td>
+    </tr>
+    <tr>
+      <td>Santiago Espinal</td>
+      <td><span style="background-color: #C6011F; color: white;">CIN</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.945</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.49</span></td>
+    </tr>
+    <tr>
+      <td>Spencer Steer</td>
+      <td><span style="background-color: #C6011F; color: white;">CIN</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.891</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,359,0);">0.59</span></td>
+    </tr>
+    <tr>
+      <td>Tyler Stephenson</td>
+      <td><span style="background-color: #C6011F; color: white;">CIN</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,370,0);">0.55</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.812</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+    </tr>
+    <tr>
+      <td>Ty France</td>
+      <td><span style="background-color: #C6011F; color: white;">CIN</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(220,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.988</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,354,0);">0.61</span></td>
+    </tr>
+    <tr>
+      <td>Brendan Rodgers</td>
+      <td><span style="background-color: #333366; color: white;">COL</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(212,0,0);">0.28</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,381,0);">0.50</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.14</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,359,0);">0.59</span></td>
+    </tr>
+    <tr>
+      <td>Michael Toglia</td>
+      <td><span style="background-color: #333366; color: white;">COL</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(223,0,0);">0.21</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(181,0,0);">0.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.688</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(190,0,0);">0.42</span></td>
+    </tr>
+    <tr>
+      <td>Ryan McMahon</td>
+      <td><span style="background-color: #333366; color: white;">COL</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,375,0);">0.53</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,256,0);">0.99</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(252,0,0);">0.02</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,354,0);">0.61</span></td>
+    </tr>
+    <tr>
+      <td>Charlie Blackmon</td>
+      <td><span style="background-color: #333366; color: white;">COL</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.971</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,357,0);">0.60</span></td>
+    </tr>
+    <tr>
+      <td>Hunter Goodman</td>
+      <td><span style="background-color: #333366; color: white;">COL</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(226,0,0);">0.18</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(194,0,0);">0.40</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.648</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+    </tr>
+    <tr>
+      <td>Brenton Doyle</td>
+      <td><span style="background-color: #333366; color: white;">COL</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,374,0);">0.53</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.1</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+    </tr>
+    <tr>
+      <td>Ezequiel Tovar</td>
+      <td><span style="background-color: #333366; color: white;">COL</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(212,0,0);">0.28</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(179,0,0);">0.49</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.12</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,369,0);">0.55</span></td>
+    </tr>
+    <tr>
+      <td>Elias Díaz</td>
+      <td><span style="background-color: #333366; color: white;">COL</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.49</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.972</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(181,0,0);">0.48</span></td>
+    </tr>
+    <tr>
+      <td>Zach McKinstry</td>
+      <td><span style="background-color: #0C2C56; color: white;">DET</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(225,0,0);">0.19</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(193,0,0);">0.40</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.676</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(209,0,0);">0.30</span></td>
+    </tr>
+    <tr>
+      <td>Javier Báez</td>
+      <td><span style="background-color: #0C2C56; color: white;">DET</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(227,0,0);">0.18</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,379,0);">0.51</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.62</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(181,0,0);">0.48</span></td>
+    </tr>
+    <tr>
+      <td>Gio Urshela</td>
+      <td><span style="background-color: #0C2C56; color: white;">DET</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.92</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(184,0,0);">0.46</span></td>
+    </tr>
+    <tr>
+      <td>Bligh Madris</td>
+      <td><span style="background-color: #0C2C56; color: white;">DET</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(210,0,0);">0.29</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(195,0,0);">0.39</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.666</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+    </tr>
+    <tr>
+      <td>Jake Rogers</td>
+      <td><span style="background-color: #0C2C56; color: white;">DET</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(225,0,0);">0.19</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(196,0,0);">0.39</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.472</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(192,0,0);">0.41</span></td>
+    </tr>
+    <tr>
+      <td>Matt Vierling</td>
+      <td><span style="background-color: #0C2C56; color: white;">DET</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.14</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,331,0);">0.70</span></td>
+    </tr>
+    <tr>
+      <td>Parker Meadows</td>
+      <td><span style="background-color: #0C2C56; color: white;">DET</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(225,0,0);">0.19</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(186,0,0);">0.45</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.606</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(190,0,0);">0.42</span></td>
+    </tr>
+    <tr>
+      <td>Colt Keith</td>
+      <td><span style="background-color: #0C2C56; color: white;">DET</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,361,0);">0.58</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.014</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,346,0);">0.64</span></td>
+    </tr>
+    <tr>
+      <td>Victor Caratini</td>
+      <td><span style="background-color: #EB6E1F; color: white;">HOU</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(212,0,0);">0.28</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,372,0);">0.54</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(251,0,0);">0.02</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.94</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,374,0);">0.53</span></td>
+    </tr>
+    <tr>
+      <td>Mauricio Dubón</td>
+      <td><span style="background-color: #EB6E1F; color: white;">HOU</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,374,0);">0.53</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.887</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+    </tr>
+    <tr>
+      <td>Alex Bregman</td>
+      <td><span style="background-color: #EB6E1F; color: white;">HOU</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,331,0);">0.70</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(228,0,0);">0.17</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.456</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(247,0,0);">0.05</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,326,0);">0.72</span></td>
+    </tr>
+    <tr>
+      <td>Jake Meyers</td>
+      <td><span style="background-color: #EB6E1F; color: white;">HOU</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,355,0);">0.60</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,275,0);">0.92</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.03</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,326,0);">0.72</span></td>
+    </tr>
+    <tr>
+      <td>Jose Altuve</td>
+      <td><span style="background-color: #EB6E1F; color: white;">HOU</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(208,0,0);">0.30</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.024</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,341,0);">0.66</span></td>
+    </tr>
+    <tr>
+      <td>Jeremy Peña</td>
+      <td><span style="background-color: #EB6E1F; color: white;">HOU</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,365,0);">0.56</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.288</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,349,0);">0.63</span></td>
+    </tr>
+    <tr>
+      <td>Chas McCormick</td>
+      <td><span style="background-color: #EB6E1F; color: white;">HOU</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(223,0,0);">0.20</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.48</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.792</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,377,0);">0.52</span></td>
+    </tr>
+    <tr>
+      <td>Yainer Diaz</td>
+      <td><span style="background-color: #EB6E1F; color: white;">HOU</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(209,0,0);">0.30</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,350,0);">0.62</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.276</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,339,0);">0.67</span></td>
+    </tr>
+    <tr>
+      <td>Yordan Alvarez</td>
+      <td><span style="background-color: #EB6E1F; color: white;">HOU</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(208,0,0);">0.31</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,343,0);">0.65</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.524</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(232,0,0);">0.15</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,326,0);">0.72</span></td>
+    </tr>
+    <tr>
+      <td>Adam Frazier</td>
+      <td><span style="background-color: #004687; color: white;">KC</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(225,0,0);">0.20</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,264,0);">0.96</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.768</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(250,0,0);">0.03</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(190,0,0);">0.42</span></td>
+    </tr>
+    <tr>
+      <td>Freddy Fermin</td>
+      <td><span style="background-color: #004687; color: white;">KC</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(209,0,0);">0.30</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(179,0,0);">0.49</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,323,0);">0.73</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.798</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,315,0);">0.76</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+    </tr>
+    <tr>
+      <td>Salvador Perez</td>
+      <td><span style="background-color: #004687; color: white;">KC</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(212,0,0);">0.28</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,378,0);">0.51</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.024</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,362,0);">0.58</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,357,0);">0.60</span></td>
+    </tr>
+    <tr>
+      <td>MJ Melendez</td>
+      <td><span style="background-color: #004687; color: white;">KC</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(223,0,0);">0.20</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(182,0,0);">0.48</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.836</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,359,0);">0.59</span></td>
+    </tr>
+    <tr>
+      <td>Michael Massey</td>
+      <td><span style="background-color: #004687; color: white;">KC</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,377,0);">0.52</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.953</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(191,0,0);">0.42</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,326,0);">0.72</span></td>
+    </tr>
+    <tr>
+      <td>Vinnie Pasquantino</td>
+      <td><span style="background-color: #004687; color: white;">KC</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,376,0);">0.52</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.303</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(233,0,0);">0.14</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,349,0);">0.63</span></td>
+    </tr>
+    <tr>
+      <td>Kyle Isbel</td>
+      <td><span style="background-color: #004687; color: white;">KC</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(220,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,376,0);">0.52</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.797</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(225,0,0);">0.20</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(190,0,0);">0.42</span></td>
+    </tr>
+    <tr>
+      <td>Maikel Garcia</td>
+      <td><span style="background-color: #004687; color: white;">KC</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,382,0);">0.50</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.296</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,306,0);">0.80</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,346,0);">0.64</span></td>
+    </tr>
+    <tr>
+      <td>Bobby Witt Jr.</td>
+      <td><span style="background-color: #004687; color: white;">KC</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(201,0,0);">0.35</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,376,0);">0.52</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.896</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(223,0,0);">0.20</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,369,0);">0.55</span></td>
+    </tr>
+    <tr>
+      <td>Mickey Moniak</td>
+      <td><span style="background-color: #BA0021; color: white;">LAA</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(220,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.49</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.932</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(243,0,0);">0.07</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(186,0,0);">0.45</span></td>
+    </tr>
+    <tr>
+      <td>Zach Neto</td>
+      <td><span style="background-color: #BA0021; color: white;">LAA</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.26</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,340,0);">0.67</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,264,0);">0.96</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.98</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(224,0,0);">0.20</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,341,0);">0.66</span></td>
+    </tr>
+    <tr>
+      <td>Taylor Ward</td>
+      <td><span style="background-color: #BA0021; color: white;">LAA</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,342,0);">0.66</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,256,0);">0.99</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.508</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(222,0,0);">0.21</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,318,0);">0.75</span></td>
+    </tr>
+    <tr>
+      <td>Brandon Drury</td>
+      <td><span style="background-color: #BA0021; color: white;">LAA</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(230,0,0);">0.16</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(192,0,0);">0.41</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.668</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(206,0,0);">0.32</span></td>
+    </tr>
+    <tr>
+      <td>Anthony Rendon</td>
+      <td><span style="background-color: #BA0021; color: white;">LAA</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.888</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,268,0);">0.95</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,379,0);">0.51</span></td>
+    </tr>
+    <tr>
+      <td>Jo Adell</td>
+      <td><span style="background-color: #BA0021; color: white;">LAA</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(223,0,0);">0.20</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,373,0);">0.54</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.768</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(248,0,0);">0.04</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(192,0,0);">0.41</span></td>
+    </tr>
+    <tr>
+      <td>Nolan Schanuel</td>
+      <td><span style="background-color: #BA0021; color: white;">LAA</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,363,0);">0.58</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.2</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(220,0,0);">0.23</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,323,0);">0.73</span></td>
+    </tr>
+    <tr>
+      <td>Willie Calhoun</td>
+      <td><span style="background-color: #BA0021; color: white;">LAA</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(186,0,0);">0.45</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.788</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,318,0);">0.75</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(196,0,0);">0.38</span></td>
+    </tr>
+    <tr>
+      <td>Logan O'Hoppe</td>
+      <td><span style="background-color: #BA0021; color: white;">LAA</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,366,0);">0.56</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.052</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(217,0,0);">0.24</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,323,0);">0.73</span></td>
+    </tr>
+    <tr>
+      <td>Will Smith</td>
+      <td><span style="background-color: #005A9C; color: white;">LAD</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.25</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,349,0);">0.63</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.952</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(241,0,0);">0.09</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+    </tr>
+    <tr>
+      <td>Enrique Hernández</td>
+      <td><span style="background-color: #005A9C; color: white;">LAD</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(222,0,0);">0.21</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(182,0,0);">0.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.877</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,382,0);">0.50</span></td>
+    </tr>
+    <tr>
+      <td>Freddie Freeman</td>
+      <td><span style="background-color: #005A9C; color: white;">LAD</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(210,0,0);">0.29</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,337,0);">0.68</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.164</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(247,0,0);">0.05</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,321,0);">0.74</span></td>
+    </tr>
+    <tr>
+      <td>Shohei Ohtani</td>
+      <td><span style="background-color: #005A9C; color: white;">LAD</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(209,0,0);">0.30</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,357,0);">0.60</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.652</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+    </tr>
+    <tr>
+      <td>Teoscar Hernández</td>
+      <td><span style="background-color: #005A9C; color: white;">LAD</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(212,0,0);">0.28</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,350,0);">0.63</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.152</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(250,0,0);">0.03</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(193,0,0);">0.40</span></td>
+    </tr>
+    <tr>
+      <td>Andy Pages</td>
+      <td><span style="background-color: #005A9C; color: white;">LAD</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,372,0);">0.54</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.063</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(243,0,0);">0.08</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,377,0);">0.52</span></td>
+    </tr>
+    <tr>
+      <td>Gavin Lux</td>
+      <td><span style="background-color: #005A9C; color: white;">LAD</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.25</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,355,0);">0.61</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.988</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(249,0,0);">0.03</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,372,0);">0.54</span></td>
+    </tr>
+    <tr>
+      <td>Mookie Betts</td>
+      <td><span style="background-color: #005A9C; color: white;">LAD</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(208,0,0);">0.30</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,336,0);">0.68</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.012</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(249,0,0);">0.04</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,328,0);">0.71</span></td>
+    </tr>
+    <tr>
+      <td>Miguel Rojas</td>
+      <td><span style="background-color: #005A9C; color: white;">LAD</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,378,0);">0.51</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.932</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(232,0,0);">0.15</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,377,0);">0.52</span></td>
+    </tr>
+    <tr>
+      <td>Ali Sánchez</td>
+      <td><span style="background-color: #00A3E0; color: white;">MIA</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(231,0,0);">0.15</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(229,0,0);">0.16</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.244</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(222,0,0);">0.21</span></td>
+    </tr>
+    <tr>
+      <td>Jake Burger</td>
+      <td><span style="background-color: #00A3E0; color: white;">MIA</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(184,0,0);">0.46</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.308</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,374,0);">0.53</span></td>
+    </tr>
+    <tr>
+      <td>Jonah Bride</td>
+      <td><span style="background-color: #00A3E0; color: white;">MIA</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(196,0,0);">0.38</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.776</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(192,0,0);">0.41</span></td>
+    </tr>
+    <tr>
+      <td>Xavier Edwards</td>
+      <td><span style="background-color: #00A3E0; color: white;">MIA</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(200,0,0);">0.36</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.981</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(181,0,0);">0.48</span></td>
+    </tr>
+    <tr>
+      <td>Kyle Stowers</td>
+      <td><span style="background-color: #00A3E0; color: white;">MIA</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(225,0,0);">0.19</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.424</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(201,0,0);">0.35</span></td>
+    </tr>
+    <tr>
+      <td>Jesús Sánchez</td>
+      <td><span style="background-color: #00A3E0; color: white;">MIA</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(183,0,0);">0.47</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.516</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,349,0);">0.63</span></td>
+    </tr>
+    <tr>
+      <td>Vidal Bruján</td>
+      <td><span style="background-color: #00A3E0; color: white;">MIA</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(222,0,0);">0.21</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(182,0,0);">0.47</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.024</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,374,0);">0.53</span></td>
+    </tr>
+    <tr>
+      <td>Derek Hill</td>
+      <td><span style="background-color: #00A3E0; color: white;">MIA</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(200,0,0);">0.36</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.664</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(202,0,0);">0.34</span></td>
+    </tr>
+    <tr>
+      <td>Otto Lopez</td>
+      <td><span style="background-color: #00A3E0; color: white;">MIA</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(188,0,0);">0.43</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.288</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+    </tr>
+    <tr>
+      <td>Joey Ortiz</td>
+      <td><span style="background-color: #FFC52F; color: white;">MIL</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,354,0);">0.61</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(243,0,0);">0.07</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.981</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,359,0);">0.59</span></td>
+    </tr>
+    <tr>
+      <td>Jackson Chourio</td>
+      <td><span style="background-color: #FFC52F; color: white;">MIL</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,354,0);">0.61</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.096</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,377,0);">0.52</span></td>
+    </tr>
+    <tr>
+      <td>Sal Frelick</td>
+      <td><span style="background-color: #FFC52F; color: white;">MIL</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,366,0);">0.56</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,257,0);">0.99</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.983</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,359,0);">0.59</span></td>
+    </tr>
+    <tr>
+      <td>Garrett Mitchell</td>
+      <td><span style="background-color: #FFC52F; color: white;">MIL</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(183,0,0);">0.47</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.784</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.49</span></td>
+    </tr>
+    <tr>
+      <td>William Contreras</td>
+      <td><span style="background-color: #FFC52F; color: white;">MIL</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(211,0,0);">0.28</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,341,0);">0.66</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.196</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,377,0);">0.52</span></td>
+    </tr>
+    <tr>
+      <td>Brice Turang</td>
+      <td><span style="background-color: #FFC52F; color: white;">MIL</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,352,0);">0.62</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.751</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,336,0);">0.68</span></td>
+    </tr>
+    <tr>
+      <td>Willy Adames</td>
+      <td><span style="background-color: #FFC52F; color: white;">MIL</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,343,0);">0.65</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.136</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,379,0);">0.51</span></td>
+    </tr>
+    <tr>
+      <td>Rhys Hoskins</td>
+      <td><span style="background-color: #FFC52F; color: white;">MIL</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(220,0,0);">0.23</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,338,0);">0.67</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.94</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,351,0);">0.62</span></td>
+    </tr>
+    <tr>
+      <td>Austin Martin</td>
+      <td><span style="background-color: #002B5C; color: white;">MIN</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(196,0,0);">0.39</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.772</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,256,0);">1.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,349,0);">0.63</span></td>
+    </tr>
+    <tr>
+      <td>Willi Castro</td>
+      <td><span style="background-color: #002B5C; color: white;">MIN</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(182,0,0);">0.47</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.957</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,284,0);">0.89</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(183,0,0);">0.47</span></td>
+    </tr>
+    <tr>
+      <td>Manuel Margot</td>
+      <td><span style="background-color: #002B5C; color: white;">MIN</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(196,0,0);">0.38</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.712</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,340,0);">0.67</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(190,0,0);">0.42</span></td>
+    </tr>
+    <tr>
+      <td>Jose Miranda</td>
+      <td><span style="background-color: #002B5C; color: white;">MIN</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(207,0,0);">0.31</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(186,0,0);">0.45</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,263,0);">0.97</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.917</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,258,0);">0.99</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,326,0);">0.72</span></td>
+    </tr>
+    <tr>
+      <td>Royce Lewis</td>
+      <td><span style="background-color: #002B5C; color: white;">MIN</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(192,0,0);">0.41</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.702</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,258,0);">0.99</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,369,0);">0.55</span></td>
+    </tr>
+    <tr>
+      <td>Max Kepler</td>
+      <td><span style="background-color: #002B5C; color: white;">MIN</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.075</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,258,0);">0.98</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,323,0);">0.73</span></td>
+    </tr>
+    <tr>
+      <td>Carlos Santana</td>
+      <td><span style="background-color: #002B5C; color: white;">MIN</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.705</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,287,0);">0.87</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(184,0,0);">0.46</span></td>
+    </tr>
+    <tr>
+      <td>Matt Wallner</td>
+      <td><span style="background-color: #002B5C; color: white;">MIN</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(189,0,0);">0.43</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,257,0);">0.99</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.828</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(184,0,0);">0.46</span></td>
+    </tr>
+    <tr>
+      <td>Christian Vázquez</td>
+      <td><span style="background-color: #002B5C; color: white;">MIN</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(220,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(186,0,0);">0.45</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.857</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,260,0);">0.98</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,374,0);">0.53</span></td>
+    </tr>
+    <tr>
+      <td>Francisco Alvarez</td>
+      <td><span style="background-color: #FF5910; color: white;">NYM</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.836</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,287,0);">0.87</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+    </tr>
+    <tr>
+      <td>Jeff McNeil</td>
+      <td><span style="background-color: #FF5910; color: white;">NYM</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,379,0);">0.51</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.088</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,310,0);">0.78</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,382,0);">0.50</span></td>
+    </tr>
+    <tr>
+      <td>Jesse Winker</td>
+      <td><span style="background-color: #FF5910; color: white;">NYM</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,340,0);">0.67</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,266,0);">0.95</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.06</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,284,0);">0.88</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,318,0);">0.75</span></td>
+    </tr>
+    <tr>
+      <td>Jose Iglesias</td>
+      <td><span style="background-color: #FF5910; color: white;">NYM</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(205,0,0);">0.32</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(181,0,0);">0.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(251,0,0);">0.02</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.7</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(232,0,0);">0.15</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,372,0);">0.54</span></td>
+    </tr>
+    <tr>
+      <td>J.D. Martinez</td>
+      <td><span style="background-color: #FF5910; color: white;">NYM</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,359,0);">0.59</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.908</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,266,0);">0.95</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,334,0);">0.69</span></td>
+    </tr>
+    <tr>
+      <td>Pete Alonso</td>
+      <td><span style="background-color: #FF5910; color: white;">NYM</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,339,0);">0.67</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.32</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,347,0);">0.64</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,339,0);">0.67</span></td>
+    </tr>
+    <tr>
+      <td>Francisco Lindor</td>
+      <td><span style="background-color: #FF5910; color: white;">NYM</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,348,0);">0.63</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.588</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,280,0);">0.90</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,326,0);">0.72</span></td>
+    </tr>
+    <tr>
+      <td>Brandon Nimmo</td>
+      <td><span style="background-color: #FF5910; color: white;">NYM</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,343,0);">0.65</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.291</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,336,0);">0.68</span></td>
+    </tr>
+    <tr>
+      <td>Harrison Bader</td>
+      <td><span style="background-color: #FF5910; color: white;">NYM</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,356,0);">0.60</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.811</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,278,0);">0.91</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,334,0);">0.69</span></td>
+    </tr>
+    <tr>
+      <td>Oswaldo Cabrera</td>
+      <td><span style="background-color: #003087; color: white;">NYY</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,382,0);">0.50</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.972</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,262,0);">0.97</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,349,0);">0.63</span></td>
+    </tr>
+    <tr>
+      <td>Alex Verdugo</td>
+      <td><span style="background-color: #003087; color: white;">NYY</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,344,0);">0.65</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.268</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,257,0);">0.99</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+    </tr>
+    <tr>
+      <td>Aaron Judge</td>
+      <td><span style="background-color: #003087; color: white;">NYY</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(204,0,0);">0.33</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,350,0);">0.62</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.612</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+    </tr>
+    <tr>
+      <td>Austin Wells</td>
+      <td><span style="background-color: #003087; color: white;">NYY</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,375,0);">0.53</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.691</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,355,0);">0.60</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(181,0,0);">0.48</span></td>
+    </tr>
+    <tr>
+      <td>Ben Rice</td>
+      <td><span style="background-color: #003087; color: white;">NYY</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(224,0,0);">0.20</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(182,0,0);">0.47</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.764</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,261,0);">0.97</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,374,0);">0.53</span></td>
+    </tr>
+    <tr>
+      <td>Gleyber Torres</td>
+      <td><span style="background-color: #003087; color: white;">NYY</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,361,0);">0.58</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.2</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,279,0);">0.90</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,346,0);">0.64</span></td>
+    </tr>
+    <tr>
+      <td>Anthony Volpe</td>
+      <td><span style="background-color: #003087; color: white;">NYY</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,363,0);">0.57</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,305,0);">0.80</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.44</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,258,0);">0.98</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,354,0);">0.61</span></td>
+    </tr>
+    <tr>
+      <td>Giancarlo Stanton</td>
+      <td><span style="background-color: #003087; color: white;">NYY</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,377,0);">0.52</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.192</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,269,0);">0.94</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(183,0,0);">0.47</span></td>
+    </tr>
+    <tr>
+      <td>Juan Soto</td>
+      <td><span style="background-color: #003087; color: white;">NYY</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(208,0,0);">0.30</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,347,0);">0.64</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.7</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,267,0);">0.95</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(181,0,0);">0.48</span></td>
+    </tr>
+    <tr>
+      <td>Lawrence Butler</td>
+      <td><span style="background-color: #003831; color: white;">OAK</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(188,0,0);">0.43</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.902</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(222,0,0);">0.21</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,354,0);">0.61</span></td>
+    </tr>
+    <tr>
+      <td>Brent Rooker</td>
+      <td><span style="background-color: #003831; color: white;">OAK</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(210,0,0);">0.29</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.168</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,368,0);">0.55</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,328,0);">0.71</span></td>
+    </tr>
+    <tr>
+      <td>Zack Gelof</td>
+      <td><span style="background-color: #003831; color: white;">OAK</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(224,0,0);">0.20</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(191,0,0);">0.41</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.728</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(251,0,0);">0.02</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(206,0,0);">0.32</span></td>
+    </tr>
+    <tr>
+      <td>Max Schuemann</td>
+      <td><span style="background-color: #003831; color: white;">OAK</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.648</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(250,0,0);">0.03</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(189,0,0);">0.43</span></td>
+    </tr>
+    <tr>
+      <td>Seth Brown</td>
+      <td><span style="background-color: #003831; color: white;">OAK</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(223,0,0);">0.21</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.49</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.92</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(236,0,0);">0.12</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+    </tr>
+    <tr>
+      <td>Miguel Andujar</td>
+      <td><span style="background-color: #003831; color: white;">OAK</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(211,0,0);">0.29</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(181,0,0);">0.48</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.849</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,288,0);">0.87</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,344,0);">0.65</span></td>
+    </tr>
+    <tr>
+      <td>Darell Hernaiz</td>
+      <td><span style="background-color: #003831; color: white;">OAK</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(227,0,0);">0.18</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(225,0,0);">0.20</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.284</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(227,0,0);">0.18</span></td>
+    </tr>
+    <tr>
+      <td>Shea Langeliers</td>
+      <td><span style="background-color: #003831; color: white;">OAK</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(221,0,0);">0.22</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(179,0,0);">0.49</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,257,0);">0.99</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.764</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(241,0,0);">0.09</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,382,0);">0.50</span></td>
+    </tr>
+    <tr>
+      <td>JJ Bleday</td>
+      <td><span style="background-color: #003831; color: white;">OAK</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,370,0);">0.55</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.172</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(247,0,0);">0.05</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+    </tr>
+    <tr>
+      <td>Brandon Marsh</td>
+      <td><span style="background-color: #E81828; color: white;">PHI</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,363,0);">0.57</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(239,0,0);">0.10</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(226,0,0);">0.18</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,326,0);">0.72</span></td>
+    </tr>
+    <tr>
+      <td>Bryce Harper</td>
+      <td><span style="background-color: #E81828; color: white;">PHI</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(212,0,0);">0.28</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,353,0);">0.61</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.948</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(251,0,0);">0.02</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,349,0);">0.63</span></td>
+    </tr>
+    <tr>
+      <td>J.T. Realmuto</td>
+      <td><span style="background-color: #E81828; color: white;">PHI</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,363,0);">0.58</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.769</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(246,0,0);">0.06</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,351,0);">0.62</span></td>
+    </tr>
+    <tr>
+      <td>Nick Castellanos</td>
+      <td><span style="background-color: #E81828; color: white;">PHI</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,366,0);">0.56</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.524</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(238,0,0);">0.11</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,346,0);">0.64</span></td>
+    </tr>
+    <tr>
+      <td>Alec Bohm</td>
+      <td><span style="background-color: #E81828; color: white;">PHI</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(209,0,0);">0.30</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,346,0);">0.64</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.06</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,315,0);">0.76</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,331,0);">0.70</span></td>
+    </tr>
+    <tr>
+      <td>Bryson Stott</td>
+      <td><span style="background-color: #E81828; color: white;">PHI</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,375,0);">0.53</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.97</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(232,0,0);">0.15</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+    </tr>
+    <tr>
+      <td>Kyle Schwarber</td>
+      <td><span style="background-color: #E81828; color: white;">PHI</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,377,0);">0.52</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.324</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(229,0,0);">0.17</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,341,0);">0.66</span></td>
+    </tr>
+    <tr>
+      <td>Johan Rojas</td>
+      <td><span style="background-color: #E81828; color: white;">PHI</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(182,0,0);">0.47</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(191,0,0);">0.42</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.852</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(207,0,0);">0.31</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(184,0,0);">0.46</span></td>
+    </tr>
+    <tr>
+      <td>Trea Turner</td>
+      <td><span style="background-color: #E81828; color: white;">PHI</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(208,0,0);">0.30</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,357,0);">0.60</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.743</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(243,0,0);">0.08</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,362,0);">0.58</span></td>
+    </tr>
+    <tr>
+      <td>Bryan De La Cruz</td>
+      <td><span style="background-color: #FDB827; color: white;">PIT</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,340,0);">0.66</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.408</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,336,0);">0.68</span></td>
+    </tr>
+    <tr>
+      <td>Bryan Reynolds</td>
+      <td><span style="background-color: #FDB827; color: white;">PIT</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(211,0,0);">0.29</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,318,0);">0.75</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.592</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,303,0);">0.81</span></td>
+    </tr>
+    <tr>
+      <td>Joey Bart</td>
+      <td><span style="background-color: #FDB827; color: white;">PIT</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,323,0);">0.73</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.205</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,311,0);">0.78</span></td>
+    </tr>
+    <tr>
+      <td>Oneil Cruz</td>
+      <td><span style="background-color: #FDB827; color: white;">PIT</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,326,0);">0.72</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.984</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,318,0);">0.75</span></td>
+    </tr>
+    <tr>
+      <td>Rowdy Tellez</td>
+      <td><span style="background-color: #FDB827; color: white;">PIT</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,312,0);">0.77</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.252</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,308,0);">0.79</span></td>
+    </tr>
+    <tr>
+      <td>Ke'Bryan Hayes</td>
+      <td><span style="background-color: #FDB827; color: white;">PIT</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.49</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.112</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,349,0);">0.63</span></td>
+    </tr>
+    <tr>
+      <td>Andrew McCutchen</td>
+      <td><span style="background-color: #FDB827; color: white;">PIT</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,318,0);">0.75</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.184</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,256,0);">1.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,321,0);">0.74</span></td>
+    </tr>
+    <tr>
+      <td>Isiah Kiner-Falefa</td>
+      <td><span style="background-color: #FDB827; color: white;">PIT</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(210,0,0);">0.29</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,328,0);">0.71</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(239,0,0);">0.10</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.013</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,344,0);">0.65</span></td>
+    </tr>
+    <tr>
+      <td>Ji Hwan Bae</td>
+      <td><span style="background-color: #FDB827; color: white;">PIT</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(221,0,0);">0.22</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(206,0,0);">0.32</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,378,0);">0.52</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.628</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(202,0,0);">0.34</span></td>
+    </tr>
+    <tr>
+      <td>Victor Robles</td>
+      <td><span style="background-color: #005C5C; color: white;">SEA</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(189,0,0);">0.43</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.72</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,338,0);">0.67</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,369,0);">0.55</span></td>
+    </tr>
+    <tr>
+      <td>Mitch Haniger</td>
+      <td><span style="background-color: #005C5C; color: white;">SEA</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(223,0,0);">0.21</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(182,0,0);">0.47</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.844</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(208,0,0);">0.30</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,362,0);">0.58</span></td>
+    </tr>
+    <tr>
+      <td>Randy Arozarena</td>
+      <td><span style="background-color: #005C5C; color: white;">SEA</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(220,0,0);">0.22</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(179,0,0);">0.49</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.9</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,374,0);">0.53</span></td>
+    </tr>
+    <tr>
+      <td>Josh Rojas</td>
+      <td><span style="background-color: #005C5C; color: white;">SEA</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(183,0,0);">0.47</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.945</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,362,0);">0.58</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,382,0);">0.50</span></td>
+    </tr>
+    <tr>
+      <td>Dylan Moore</td>
+      <td><span style="background-color: #005C5C; color: white;">SEA</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(223,0,0);">0.20</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(179,0,0);">0.49</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.924</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(239,0,0);">0.10</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+    </tr>
+    <tr>
+      <td>Mitch Garver</td>
+      <td><span style="background-color: #005C5C; color: white;">SEA</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(229,0,0);">0.17</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.828</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(199,0,0);">0.36</span></td>
+    </tr>
+    <tr>
+      <td>Julio Rodríguez</td>
+      <td><span style="background-color: #005C5C; color: white;">SEA</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(189,0,0);">0.42</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.84</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(245,0,0);">0.06</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(204,0,0);">0.33</span></td>
+    </tr>
+    <tr>
+      <td>Leo Rivas</td>
+      <td><span style="background-color: #005C5C; color: white;">SEA</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(222,0,0);">0.21</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(237,0,0);">0.12</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.332</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(232,0,0);">0.15</span></td>
+    </tr>
+    <tr>
+      <td>Justin Turner</td>
+      <td><span style="background-color: #005C5C; color: white;">SEA</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,366,0);">0.56</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.807</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(242,0,0);">0.08</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+    </tr>
+    <tr>
+      <td>Nolan Gorman</td>
+      <td><span style="background-color: #C41E3A; color: white;">STL</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(223,0,0);">0.21</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(193,0,0);">0.40</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.636</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(250,0,0);">0.03</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(192,0,0);">0.41</span></td>
+    </tr>
+    <tr>
+      <td>Victor Scott II</td>
+      <td><span style="background-color: #C41E3A; color: white;">STL</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(237,0,0);">0.12</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(234,0,0);">0.14</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(245,0,0);">0.07</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.236</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(194,0,0);">0.40</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(227,0,0);">0.18</span></td>
+    </tr>
+    <tr>
+      <td>Willson Contreras</td>
+      <td><span style="background-color: #C41E3A; color: white;">STL</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(194,0,0);">0.39</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.618</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+    </tr>
+    <tr>
+      <td>Nolan Arenado</td>
+      <td><span style="background-color: #C41E3A; color: white;">STL</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(191,0,0);">0.42</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.9</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(224,0,0);">0.20</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(192,0,0);">0.41</span></td>
+    </tr>
+    <tr>
+      <td>Lars Nootbaar</td>
+      <td><span style="background-color: #C41E3A; color: white;">STL</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(220,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(185,0,0);">0.45</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.733</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,306,0);">0.80</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(189,0,0);">0.43</span></td>
+    </tr>
+    <tr>
+      <td>Alec Burleson</td>
+      <td><span style="background-color: #C41E3A; color: white;">STL</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(212,0,0);">0.28</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(181,0,0);">0.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.32</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,382,0);">0.50</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,344,0);">0.65</span></td>
+    </tr>
+    <tr>
+      <td>Paul Goldschmidt</td>
+      <td><span style="background-color: #C41E3A; color: white;">STL</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(219,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.14</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(211,0,0);">0.28</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,374,0);">0.53</span></td>
+    </tr>
+    <tr>
+      <td>Brendan Donovan</td>
+      <td><span style="background-color: #C41E3A; color: white;">STL</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(181,0,0);">0.48</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.196</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+    </tr>
+    <tr>
+      <td>Masyn Winn</td>
+      <td><span style="background-color: #C41E3A; color: white;">STL</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(212,0,0);">0.28</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(188,0,0);">0.43</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.092</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(234,0,0);">0.14</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,354,0);">0.61</span></td>
+    </tr>
+    <tr>
+      <td>Dylan Carlson</td>
+      <td><span style="background-color: #8FBCE6; color: white;">TB</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(222,0,0);">0.21</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(205,0,0);">0.33</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.584</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(247,0,0);">0.05</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(199,0,0);">0.36</span></td>
+    </tr>
+    <tr>
+      <td>José Caballero</td>
+      <td><span style="background-color: #8FBCE6; color: white;">TB</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(189,0,0);">0.42</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.841</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(241,0,0);">0.09</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,367,0);">0.56</span></td>
+    </tr>
+    <tr>
+      <td>Brandon Lowe</td>
+      <td><span style="background-color: #8FBCE6; color: white;">TB</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.596</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(235,0,0);">0.13</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(183,0,0);">0.47</span></td>
+    </tr>
+    <tr>
+      <td>Christopher Morel</td>
+      <td><span style="background-color: #8FBCE6; color: white;">TB</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(225,0,0);">0.19</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(188,0,0);">0.44</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.684</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(252,0,0);">0.02</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,377,0);">0.52</span></td>
+    </tr>
+    <tr>
+      <td>Jonny DeLuca</td>
+      <td><span style="background-color: #8FBCE6; color: white;">TB</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(225,0,0);">0.19</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(191,0,0);">0.41</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.728</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(229,0,0);">0.17</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+    </tr>
+    <tr>
+      <td>Josh Lowe</td>
+      <td><span style="background-color: #8FBCE6; color: white;">TB</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(197,0,0);">0.38</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.679</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(235,0,0);">0.13</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(184,0,0);">0.46</span></td>
+    </tr>
+    <tr>
+      <td>Yandy Díaz</td>
+      <td><span style="background-color: #8FBCE6; color: white;">TB</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,376,0);">0.52</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.088</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(223,0,0);">0.21</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(183,0,0);">0.47</span></td>
+    </tr>
+    <tr>
+      <td>Alex Jackson</td>
+      <td><span style="background-color: #8FBCE6; color: white;">TB</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(237,0,0);">0.12</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(187,0,0);">0.44</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.472</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(212,0,0);">0.28</span></td>
+    </tr>
+    <tr>
+      <td>Wyatt Langford</td>
+      <td><span style="background-color: #003278; color: white;">TEX</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(217,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,365,0);">0.57</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.049</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(247,0,0);">0.05</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,346,0);">0.64</span></td>
+    </tr>
+    <tr>
+      <td>Leody Taveras</td>
+      <td><span style="background-color: #003278; color: white;">TEX</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(220,0,0);">0.23</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(186,0,0);">0.45</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.778</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(204,0,0);">0.33</span></td>
+    </tr>
+    <tr>
+      <td>Nathaniel Lowe</td>
+      <td><span style="background-color: #003278; color: white;">TEX</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,365,0);">0.56</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.821</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.01</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,362,0);">0.58</span></td>
+    </tr>
+    <tr>
+      <td>Corey Seager</td>
+      <td><span style="background-color: #003278; color: white;">TEX</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,354,0);">0.61</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.148</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(248,0,0);">0.04</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+    </tr>
+    <tr>
+      <td>Carson Kelly</td>
+      <td><span style="background-color: #003278; color: white;">TEX</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,381,0);">0.51</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.734</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(248,0,0);">0.04</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,379,0);">0.51</span></td>
+    </tr>
+    <tr>
+      <td>Marcus Semien</td>
+      <td><span style="background-color: #003278; color: white;">TEX</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(218,0,0);">0.24</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(180,0,0);">0.49</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,357,0);">0.60</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.932</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(253,0,0);">0.01</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(193,0,0);">0.40</span></td>
+    </tr>
+    <tr>
+      <td>Josh Jung</td>
+      <td><span style="background-color: #003278; color: white;">TEX</span></td>
+      <td>600.0</td>
+      <td><span style="background-color: rgb(211,0,0);">0.28</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(203,0,0);">0.34</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.592</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(207,0,0);">0.31</span></td>
+    </tr>
+    <tr>
+      <td>Josh Smith</td>
+      <td><span style="background-color: #003278; color: white;">TEX</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(213,0,0);">0.27</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,369,0);">0.55</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.778</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(251,0,0);">0.03</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,354,0);">0.61</span></td>
+    </tr>
+    <tr>
+      <td>Adolis García</td>
+      <td><span style="background-color: #003278; color: white;">TEX</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(221,0,0);">0.22</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(182,0,0);">0.47</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,264,0);">0.96</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.972</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,364,0);">0.57</span></td>
+    </tr>
+    <tr>
+      <td>CJ Abrams</td>
+      <td><span style="background-color: #AB0003; color: white;">WSH</span></td>
+      <td>200.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,340,0);">0.66</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,255,0);">1.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.263</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,341,0);">0.66</span></td>
+    </tr>
+    <tr>
+      <td>Ildemaro Vargas</td>
+      <td><span style="background-color: #AB0003; color: white;">WSH</span></td>
+      <td>700.0</td>
+      <td><span style="background-color: rgb(215,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(178,0,0);">0.50</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.026</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,362,0);">0.58</span></td>
+    </tr>
+    <tr>
+      <td>James Wood</td>
+      <td><span style="background-color: #AB0003; color: white;">WSH</span></td>
+      <td>500.0</td>
+      <td><span style="background-color: rgb(214,0,0);">0.26</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,379,0);">0.51</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.208</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(248,0,0);">0.04</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,346,0);">0.64</span></td>
+    </tr>
+    <tr>
+      <td>Jacob Young</td>
+      <td><span style="background-color: #AB0003; color: white;">WSH</span></td>
+      <td>900.0</td>
+      <td><span style="background-color: rgb(216,0,0);">0.25</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,359,0);">0.59</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.267</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,349,0);">0.63</span></td>
+    </tr>
+    <tr>
+      <td>Alex Call</td>
+      <td><span style="background-color: #AB0003; color: white;">WSH</span></td>
+      <td>100.0</td>
+      <td><span style="background-color: rgb(190,0,0);">0.42</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(204,0,0);">0.33</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.548</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(181,0,0);">0.48</span></td>
+    </tr>
+    <tr>
+      <td>Juan Yepez</td>
+      <td><span style="background-color: #AB0003; color: white;">WSH</span></td>
+      <td>300.0</td>
+      <td><span style="background-color: rgb(206,0,0);">0.32</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,380,0);">0.51</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.867</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,374,0);">0.53</span></td>
+    </tr>
+    <tr>
+      <td>Keibert Ruiz</td>
+      <td><span style="background-color: #AB0003; color: white;">WSH</span></td>
+      <td>400.0</td>
+      <td><span style="background-color: rgb(220,0,0);">0.22</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(0,365,0);">0.57</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.096</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(254,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,339,0);">0.67</span></td>
+    </tr>
+    <tr>
+      <td>Luis García Jr.</td>
+      <td><span style="background-color: #AB0003; color: white;">WSH</span></td>
+      <td>800.0</td>
+      <td><span style="background-color: rgb(210,0,0);">0.29</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,339,0);">0.67</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #FF0000; color: white;">1.28</span></td>
+      <td><span style="background-color: #FF0000; color: white;">0.0</span></td>
+      <td><span style="background-color: rgb(255,0,0);">0.00</span></td>
+      <td><span style="background-color: #00FF00; color: black;">1.0</span></td>
+      <td><span style="background-color: rgb(0,318,0);">0.75</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+function filterTable() {
+    var input, filter, table, tr, td, i, txtValue, columnIndex;
+    input = document.getElementById("myInput");
+    filter = input.value;
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    columnIndex = document.getElementById("columnSelect").value;
+
+    for (i = 1; i < tr.length; i++) {
+        tr[i].style.display = "none";
+        td = tr[i].getElementsByTagName("td")[columnIndex];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
+                tr[i].style.display = "";
+            }
+        }
+    }
+}
+
+function navigateToDate() {
+    var dateInput, selectedDate, formattedDate;
+    dateInput = document.getElementById("datePicker");
+    selectedDate = new Date(dateInput.value);
+    formattedDate = selectedDate.toISOString().split('T')[0]; // YYYY-MM-DD format
+    var baseUrl = "https://apnpapnu.github.io/APNUBETS/"; // Replace with your base URL
+    window.location.href = baseUrl + formattedDate + ".html"; // Redirect to the new URL
+}
+
+function openIframe() {
+    var iframe = document.getElementById("detailsIframe");
+    var today = new Date();
+    var yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+    var formattedDate = yesterday.toISOString().split('T')[0]; // YYYY-MM-DD format
+    iframe.src = "https://apnpapnu.github.io/APNUBETS/Accuracy_" + formattedDate + ".html"; // Replace with your URL or dynamic content source
+    iframe.style.display = iframe.style.display === "none" ? "block" : "none";
+}
+</script>
+
+</body>
+</html>
