@@ -1,0 +1,238 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CSV to HTML Table</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                color: #333;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 80%;
+                margin: 20px auto;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                background-color: #fff;
+                border: 1px solid #ddd;
+            }
+            th, td {
+                padding: 10px;
+                text-align: center;
+                border: 1px solid #ddd;
+            }
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            caption {
+                padding: 10px;
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <style type="text/css">
+#T_2fa46_row0_col0 {
+  background-color: #CE1141;
+  color: white;
+}
+#T_2fa46_row0_col3 {
+  background-color: #E81828;
+  color: white;
+}
+#T_2fa46_row1_col0 {
+  background-color: #DF4601;
+  color: white;
+}
+#T_2fa46_row1_col3 {
+  background-color: #EB6E1F;
+  color: white;
+}
+#T_2fa46_row2_col0 {
+  background-color: #0E3386;
+  color: white;
+}
+#T_2fa46_row2_col3 {
+  background-color: #0C2C56;
+  color: white;
+}
+#T_2fa46_row3_col0 {
+  background-color: #C6011F;
+  color: white;
+}
+#T_2fa46_row3_col3 {
+  background-color: #FDB827;
+  color: white;
+}
+#T_2fa46_row4_col0 {
+  background-color: #E31937;
+  color: white;
+}
+#T_2fa46_row4_col3 {
+  background-color: #003087;
+  color: white;
+}
+#T_2fa46_row5_col0 {
+  background-color: #333366;
+  color: white;
+}
+#T_2fa46_row5_col3 {
+  background-color: #AB0003;
+  color: white;
+}
+#T_2fa46_row6_col0 {
+  background-color: #BA0021;
+  color: white;
+}
+#T_2fa46_row6_col3 {
+  background-color: #134A8E;
+  color: white;
+}
+#T_2fa46_row7_col0 {
+  background-color: #FFC52F;
+  color: white;
+}
+#T_2fa46_row7_col3 {
+  background-color: #C41E3A;
+  color: white;
+}
+#T_2fa46_row8_col0 {
+  background-color: #FF5910;
+  color: white;
+}
+#T_2fa46_row8_col3 {
+  background-color: #002D62;
+  color: white;
+}
+#T_2fa46_row9_col0 {
+  background-color: #003831;
+  color: white;
+}
+#T_2fa46_row9_col3 {
+  background-color: #8FBCE6;
+  color: white;
+}
+</style>
+<table id="T_2fa46" class="table table-striped">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_2fa46_level0_col0" class="col_heading level0 col0" >parentTeamId</th>
+      <th id="T_2fa46_level0_col1" class="col_heading level0 col1" >predictions_x</th>
+      <th id="T_2fa46_level0_col2" class="col_heading level0 col2" >predicted_probabilities_x</th>
+      <th id="T_2fa46_level0_col3" class="col_heading level0 col3" >parentTeamId_P1</th>
+      <th id="T_2fa46_level0_col4" class="col_heading level0 col4" >predictions_y</th>
+      <th id="T_2fa46_level0_col5" class="col_heading level0 col5" >predicted_probabilities_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_2fa46_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_2fa46_row0_col0" class="data row0 col0" >ATL</td>
+      <td id="T_2fa46_row0_col1" class="data row0 col1" >0.000000</td>
+      <td id="T_2fa46_row0_col2" class="data row0 col2" >0.347000</td>
+      <td id="T_2fa46_row0_col3" class="data row0 col3" >PHI</td>
+      <td id="T_2fa46_row0_col4" class="data row0 col4" >1.000000</td>
+      <td id="T_2fa46_row0_col5" class="data row0 col5" >0.649000</td>
+    </tr>
+    <tr>
+      <th id="T_2fa46_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_2fa46_row1_col0" class="data row1 col0" >BAL</td>
+      <td id="T_2fa46_row1_col1" class="data row1 col1" >0.000000</td>
+      <td id="T_2fa46_row1_col2" class="data row1 col2" >0.361000</td>
+      <td id="T_2fa46_row1_col3" class="data row1 col3" >HOU</td>
+      <td id="T_2fa46_row1_col4" class="data row1 col4" >0.000000</td>
+      <td id="T_2fa46_row1_col5" class="data row1 col5" >0.357000</td>
+    </tr>
+    <tr>
+      <th id="T_2fa46_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_2fa46_row2_col0" class="data row2 col0" >CHC</td>
+      <td id="T_2fa46_row2_col1" class="data row2 col1" >1.000000</td>
+      <td id="T_2fa46_row2_col2" class="data row2 col2" >0.638000</td>
+      <td id="T_2fa46_row2_col3" class="data row2 col3" >DET</td>
+      <td id="T_2fa46_row2_col4" class="data row2 col4" >0.111000</td>
+      <td id="T_2fa46_row2_col5" class="data row2 col5" >0.472000</td>
+    </tr>
+    <tr>
+      <th id="T_2fa46_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_2fa46_row3_col0" class="data row3 col0" >CIN</td>
+      <td id="T_2fa46_row3_col1" class="data row3 col1" >0.000000</td>
+      <td id="T_2fa46_row3_col2" class="data row3 col2" >0.333000</td>
+      <td id="T_2fa46_row3_col3" class="data row3 col3" >PIT</td>
+      <td id="T_2fa46_row3_col4" class="data row3 col4" >0.000000</td>
+      <td id="T_2fa46_row3_col5" class="data row3 col5" >0.433000</td>
+    </tr>
+    <tr>
+      <th id="T_2fa46_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_2fa46_row4_col0" class="data row4 col0" >CLE</td>
+      <td id="T_2fa46_row4_col1" class="data row4 col1" >0.000000</td>
+      <td id="T_2fa46_row4_col2" class="data row4 col2" >0.280000</td>
+      <td id="T_2fa46_row4_col3" class="data row4 col3" >NYY</td>
+      <td id="T_2fa46_row4_col4" class="data row4 col4" >0.222000</td>
+      <td id="T_2fa46_row4_col5" class="data row4 col5" >0.494000</td>
+    </tr>
+    <tr>
+      <th id="T_2fa46_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_2fa46_row5_col0" class="data row5 col0" >COL</td>
+      <td id="T_2fa46_row5_col1" class="data row5 col1" >1.000000</td>
+      <td id="T_2fa46_row5_col2" class="data row5 col2" >0.670000</td>
+      <td id="T_2fa46_row5_col3" class="data row5 col3" >WSH</td>
+      <td id="T_2fa46_row5_col4" class="data row5 col4" >1.000000</td>
+      <td id="T_2fa46_row5_col5" class="data row5 col5" >0.581000</td>
+    </tr>
+    <tr>
+      <th id="T_2fa46_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_2fa46_row6_col0" class="data row6 col0" >LAA</td>
+      <td id="T_2fa46_row6_col1" class="data row6 col1" >1.000000</td>
+      <td id="T_2fa46_row6_col2" class="data row6 col2" >0.718000</td>
+      <td id="T_2fa46_row6_col3" class="data row6 col3" >TOR</td>
+      <td id="T_2fa46_row6_col4" class="data row6 col4" >1.000000</td>
+      <td id="T_2fa46_row6_col5" class="data row6 col5" >0.530000</td>
+    </tr>
+    <tr>
+      <th id="T_2fa46_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_2fa46_row7_col0" class="data row7 col0" >MIL</td>
+      <td id="T_2fa46_row7_col1" class="data row7 col1" >0.000000</td>
+      <td id="T_2fa46_row7_col2" class="data row7 col2" >0.360000</td>
+      <td id="T_2fa46_row7_col3" class="data row7 col3" >STL</td>
+      <td id="T_2fa46_row7_col4" class="data row7 col4" >0.300000</td>
+      <td id="T_2fa46_row7_col5" class="data row7 col5" >0.491000</td>
+    </tr>
+    <tr>
+      <th id="T_2fa46_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_2fa46_row8_col0" class="data row8 col0" >NYM</td>
+      <td id="T_2fa46_row8_col1" class="data row8 col1" >1.000000</td>
+      <td id="T_2fa46_row8_col2" class="data row8 col2" >0.779000</td>
+      <td id="T_2fa46_row8_col3" class="data row8 col3" >SD</td>
+      <td id="T_2fa46_row8_col4" class="data row8 col4" >0.000000</td>
+      <td id="T_2fa46_row8_col5" class="data row8 col5" >0.445000</td>
+    </tr>
+    <tr>
+      <th id="T_2fa46_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_2fa46_row9_col0" class="data row9 col0" >OAK</td>
+      <td id="T_2fa46_row9_col1" class="data row9 col1" >1.000000</td>
+      <td id="T_2fa46_row9_col2" class="data row9 col2" >0.702000</td>
+      <td id="T_2fa46_row9_col3" class="data row9 col3" >TB</td>
+      <td id="T_2fa46_row9_col4" class="data row9 col4" >1.000000</td>
+      <td id="T_2fa46_row9_col5" class="data row9 col5" >0.527000</td>
+    </tr>
+  </tbody>
+</table>
+
+        </div>
+    </body>
+    </html>
+    
