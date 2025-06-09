@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Apnubets/static/css/main.e77300c9.css",
+    "main.js": "/Apnubets/static/js/main.27d20ec6.js",
+    "index.html": "/Apnubets/index.html",
+    "main.e77300c9.css.map": "/Apnubets/static/css/main.e77300c9.css.map",
+    "main.27d20ec6.js.map": "/Apnubets/static/js/main.27d20ec6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e77300c9.css",
+    "static/js/main.27d20ec6.js"
+  ]
+}
