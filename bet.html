@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Script Runner - Render + GitHub Pages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .config-section {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .config-section.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .config-section.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .config-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            margin: 10px 0;
+            transition: border-color 0.3s ease;
+        }
+        
+        .config-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 10px 10px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(135deg, #4fd1c7 0%, #81e6d9 100%);
+        }
+        
+        .status {
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            border-left: 5px solid;
+            display: none;
+        }
+        
+        .status.loading {
+            background: #e3f2fd;
+            color: #1565c0;
+            border-color: #2196f3;
+        }
+        
+        .status.success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            border-color: #4caf50;
+        }
+        
+        .status.error {
+            background: #ffebee;
+            color: #c62828;
+            border-color: #f44336;
+        }
+        
+        .results {
+            margin-top: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #e9ecef;
+            display: none;
+        }
+        
+        .results h3 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .json-display {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        
+        .feature-card h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .api-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .api-status.online {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .api-status.offline {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        
+        .api-status.checking {
+            background: #bee3f8;
+            color: #2a4365;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Python Script Runner</h1>
+            <p>Free hosting with Render + GitHub Pages</p>
+        </div>
+        
+        <div class="content">
+            <!-- Configuration Section -->
+            <div id="configSection" class="config-section">
+                <h3>🔧 API Configuration</h3>
+                <p><strong>Enter your Render API URL below:</strong></p>
+                <input 
+                    type="text" 
+                    id="apiUrl" 
+                    class="config-input"
+                    placeholder="https://your-app-name.onrender.com"
+                    value="https://python-script-api.onrender.com"
+                >
+                <p><small>💡 Replace with your actual Render service URL after deployment</small></p>
+                <button onclick="testConnection()" class="btn secondary">🔍 Test Connection</button>
+            </div>
+            
+            <!-- Control Panel -->
+            <div style="text-align: center; margin: 30px 0;">
+                <button id="runScript" onclick="runPythonScript()" class="btn">
+                    🚀 Run Python Script
+                </button>
+                <button onclick="testConnection()" class="btn secondary">
+                    ❤️ Health Check
+                </button>
+                <span id="apiStatus" class="api-status checking">Checking...</span>
+            </div>
+            
+            <!-- Status Messages -->
+            <div id="status" class="status"></div>
+            
+            <!-- Features -->
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>⚡ Fast Execution</h4>
+                    <p>Python scripts run on Render's cloud infrastructure</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🆓 Completely Free</h4>
+                    <p>Both Render and GitHub Pages offer generous free tiers</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔄 Auto-Deploy</h4>
+                    <p>Updates automatically when you push to GitHub</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🌐 Global CDN</h4>
+                    <p>GitHub Pages provides fast global content delivery</p>
+                </div>
+            </div>
+            
+            <!-- Results Display -->
+            <div id="results" class="results">
+                <h3>📊 Script Results</h3>
+                <div id="resultsContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentApiUrl = '';
+        
+        function getApiUrl() {
+            const input = document.getElementById('apiUrl');
+            let url = input.value.trim();
+            
+            // Clean up the URL
+            if (!url.startsWith('http')) {
+                url = 'https://' + url;
+            }
+            
+            // Remove trailing slash
+            url = url.replace(/\/$/, '');
+            
+            return url;
+        }
+        
+        function updateConfigSection(status, message) {
+            const section = document.getElementById('configSection');
+            section.className = `config-section ${status}`;
+            
+            if (status === 'success') {
+                currentApiUrl = getApiUrl();
+                document.getElementById('runScript').disabled = false;
+            } else if (status === 'error') {
+                currentApiUrl = '';
+                document.getElementById('runScript').disabled = true;
+            }
+        }
+        
+        function updateApiStatus(status) {
+            const statusElement = document.getElementById('apiStatus');
+            statusElement.className = `api-status ${status}`;
+            
+            const statusText = {
+                'online': '🟢 Online',
+                'offline': '🔴 Offline', 
+                'checking': '🟡 Checking...'
+            };
+            
+            statusElement.textContent = statusText[status] || status;
+        }
+        
+        function showStatus(message, type = 'loading') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = `status ${type}`;
+            statusDiv.textContent = message;
+            statusDiv.style.display = 'block';
+        }
+        
+        function hideStatus() {
+            document.getElementById('status').style.display = 'none';
+        }
+        
+        async function testConnection() {
+            const apiUrl = getApiUrl();
+            
+            if (!apiUrl) {
+                showStatus('❌ Please enter a valid API URL', 'error');
+                updateApiStatus('offline');
+                return;
+            }
+            
+            updateApiStatus('checking');
+            showStatus('🔍 Testing connection to your API...', 'loading');
+            
+            try {
+                const response = await fetch(`${apiUrl}/api/health`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    showStatus(`✅ Connection successful! API is healthy and ready.`, 'success');
+                    updateApiStatus('online');
+                    updateConfigSection('success', 'API connection verified!');
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+            } catch (error) {
+                showStatus(`❌ Connection failed: ${error.message}`, 'error');
+                updateApiStatus('offline');
+                updateConfigSection('error', `Connection failed: ${error.message}`);
+            }
+        }
+        
+        async function runPythonScript() {
+            if (!currentApiUrl) {
+                showStatus('⚠️ Please test your API connection first', 'error');
+                return;
+            }
+            
+            const button = document.getElementById('runScript');
+            const originalText = button.innerHTML;
+            
+            button.disabled = true;
+            button.innerHTML = '⏳ Running...';
+            
+            showStatus('🚀 Executing Python script on Render...', 'loading');
+            
+            try {
+                const requestData = {
+                    message: 'Hello from GitHub Pages!',
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent
+                };
+                
+                const response = await fetch(`${currentApiUrl}/api/run-script`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                showStatus('✅ Script executed successfully!', 'success');
+                displayResults(data);
+                
+            } catch (error) {
+                showStatus(`❌ Script execution failed: ${error.message}`, 'error');
+                console.error('Script execution error:', error);
+            } finally {
+                button.disabled = false;
+                button.innerHTML = originalText;
+            }
+        }
+        
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('results');
+            const contentDiv = document.getElementById('resultsContent');
+            
+            // Add some formatting for better display
+            const formattedData = {
+                ...data,
+                formatted_timestamp: data.timestamp ? new Date(data.timestamp).toLocaleString() : 'Not available'
+            };
+            
+            contentDiv.innerHTML = `
+                <div class="json-display">${JSON.stringify(formattedData, null, 2)}</div>
+            `;
+            
+            resultsDiv.style.display = 'block';
+            
+            // Scroll to results
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            // Auto-test connection if URL looks valid
+            const apiUrl = getApiUrl();
+            if (apiUrl && apiUrl.includes('onrender.com')) {
+                setTimeout(testConnection, 1000);
+            } else {
+                updateApiStatus('offline');
+                document.getElementById('runScript').disabled = true;
+            }
+        });
+        
+        // Auto-test connection when URL changes
+        document.getElementById('apiUrl').addEventListener('blur', () => {
+            const apiUrl = getApiUrl();
+            if (apiUrl && apiUrl.length > 10) {
+                testConnection();
+            }
+        });
+    </script>
+</body>
+</html>
