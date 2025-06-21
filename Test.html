@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Drive File Viewer</title>
+</head>
+<body>
+  <h2>File Content:</h2>
+  <pre id="fileContent">Loading...</pre>
+
+  <script>
+    const fileId = "1Zxrt2UE0rR0OFJOY9FNfegOmfE8GMJNa";
+    const url = `https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id=${fileId}`;
+
+    fetch(url)
+      .then(response => {
+        if (!response.ok) throw new Error("HTTP error " + response.status);
+        return response.text();
+      })
+      .then(text => {
+        document.getElementById("fileContent").textContent = text;
+      })
+      .catch(err => {
+        document.getElementById("fileContent").textContent = "Failed to load file: " + err;
+      });
+  </script>
+</body>
+</html>
