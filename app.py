@@ -1,201 +1,195 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import datetime
-import pytz
 import os
 import subprocess
 import sys
-import json
+import tempfile
+import requests
+from pathlib import Path
+import pytz
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for GitHub Pages
-
-def get_eastern_date():
-    """Get current date in Eastern Time formatted as YYYYMMDD"""
-    eastern = pytz.timezone('US/Eastern')
-    now = datetime.datetime.now(eastern)
-    return now.strftime('%Y%m%d')
-
-def get_report_filename():
-    """Generate the expected report filename based on current date"""
-    date_str = get_eastern_date()
-    return f"line_movement_report_{date_str}.txt"
-
-def run_line_movement_script(script_code):
-    """Execute the Python script code and return results"""
-    try:
-        # Create a temporary Python file
-        script_filename = "temp_line_movement_script.py"
-        
-        with open(script_filename, 'w') as f:
-            f.write(script_code)
-        
-        # Execute the script
-        result = subprocess.run([sys.executable, script_filename], 
-                              capture_output=True, text=True, timeout=300)
-        
-        # Clean up temporary file
-        if os.path.exists(script_filename):
-            os.remove(script_filename)
-        
-        if result.returncode != 0:
-            raise Exception(f"Script execution failed: {result.stderr}")
-        
-        return {
-            'success': True,
-            'stdout': result.stdout,
-            'stderr': result.stderr,
-            'return_code': result.returncode
-        }
-        
-    except subprocess.TimeoutExpired:
-        raise Exception("Script execution timed out (5 minutes)")
-    except Exception as e:
-        raise Exception(f"Error running script: {str(e)}")
-
-def read_report_file():
-    """Read the generated line movement report file"""
-    report_filename = get_report_filename()
-    
-    # Check if file exists
-    if not os.path.exists(report_filename):
-        return {
-            'found': False,
-            'filename': report_filename,
-            'message': f"Report file {report_filename} not found. Make sure your script generates this file."
-        }
-    
-    try:
-        with open(report_filename, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # Get file stats
-        file_stats = os.stat(report_filename)
-        file_size = file_stats.st_size
-        modified_time = datetime.datetime.fromtimestamp(file_stats.st_mtime)
-        
-        return {
-            'found': True,
-            'filename': report_filename,
-            'content': content,
-            'file_size': file_size,
-            'modified_time': modified_time.isoformat(),
-            'line_count': len(content.split('\n')) if content else 0
-        }
-        
-    except Exception as e:
-        return {
-            'found': True,
-            'filename': report_filename,
-            'error': f"Error reading file: {str(e)}"
-        }
+CORS(app)
 
 @app.route('/')
 def home():
     return jsonify({
-        'message': 'Line Movement Script API is running!',
+        'message': 'Line Movement Report API is running!',
         'status': 'healthy',
         'timestamp': datetime.datetime.now().isoformat(),
-        'expected_report_file': get_report_filename(),
-        'current_eastern_date': get_eastern_date()
+        'timezone': 'Eastern Standard Time'
     })
 
 @app.route('/api/run-script', methods=['POST'])
 def run_script():
     try:
         data = request.get_json() or {}
+        script_url = data.get('script_url', '').strip()
         
-        # Get the Python script code from the request
-        script_code = data.get('script_code', '')
-        
-        if not script_code:
+        if not script_url:
             return jsonify({
                 'status': 'error',
-                'message': 'No script code provided. Please include "script_code" in your request body.',
+                'message': 'No script URL provided. Please provide the GitHub raw URL to your Python script.',
                 'timestamp': datetime.datetime.now().isoformat()
             }), 400
         
-        # Run the script
-        execution_result = run_line_movement_script(script_code)
+        # Validate GitHub raw URL
+        if 'raw.githubusercontent.com' not in script_url and 'github.com' in script_url:
+            # Convert regular GitHub URL to raw URL
+            script_url = script_url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/')
         
-        # Read the generated report file
-        report_data = read_report_file()
+        # Download the script
+        try:
+            response = requests.get(script_url, timeout=30)
+            response.raise_for_status()
+            script_content = response.text
+        except requests.RequestException as e:
+            return jsonify({
+                'status': 'error',
+                'message': f'Failed to download script: {str(e)}',
+                'timestamp': datetime.datetime.now().isoformat()
+            }), 400
         
-        # Prepare the response
-        result = {
-            'status': 'success',
-            'timestamp': datetime.datetime.now().isoformat(),
-            'eastern_date': get_eastern_date(),
-            'script_execution': execution_result,
-            'report_file': report_data,
-            'message': 'Script executed successfully!'
-        }
+        # Get current date in EST for filename
+        est = pytz.timezone('US/Eastern')
+        current_date = datetime.datetime.now(est).strftime('%Y%m%d')
+        expected_filename = f'line_movement_report_{current_date}.txt'
         
-        return jsonify(result)
-        
+        # Create temporary directory for script execution
+        with tempfile.TemporaryDirectory() as temp_dir:
+            script_path = os.path.join(temp_dir, 'user_script.py')
+            
+            # Write script to temporary file
+            with open(script_path, 'w', encoding='utf-8') as f:
+                f.write(script_content)
+            
+            # Execute the script
+            try:
+                # Change to temp directory so any file outputs go there
+                original_cwd = os.getcwd()
+                os.chdir(temp_dir)
+                
+                # Run the script
+                result = subprocess.run(
+                    [sys.executable, script_path], 
+                    capture_output=True, 
+                    text=True, 
+                    timeout=300  # 5 minute timeout
+                )
+                
+                # Change back to original directory
+                os.chdir(original_cwd)
+                
+                # Check for execution errors
+                if result.returncode != 0:
+                    return jsonify({
+                        'status': 'error',
+                        'message': 'Script execution failed',
+                        'error_output': result.stderr,
+                        'script_output': result.stdout,
+                        'timestamp': datetime.datetime.now().isoformat()
+                    }), 500
+                
+                # Look for the line movement report file
+                report_content = None
+                report_filename = None
+                
+                # Check for files in temp directory
+                temp_files = list(Path(temp_dir).glob('*.txt'))
+                
+                # First, look for the expected filename
+                expected_file = Path(temp_dir) / expected_filename
+                if expected_file.exists():
+                    report_filename = expected_filename
+                    with open(expected_file, 'r', encoding='utf-8') as f:
+                        report_content = f.read()
+                else:
+                    # Look for any line_movement_report_*.txt file
+                    for file_path in temp_files:
+                        if 'line_movement_report_' in file_path.name:
+                            report_filename = file_path.name
+                            with open(file_path, 'r', encoding='utf-8') as f:
+                                report_content = f.read()
+                            break
+                    
+                    # If no line movement report found, look for any .txt file
+                    if not report_content and temp_files:
+                        report_filename = temp_files[0].name
+                        with open(temp_files[0], 'r', encoding='utf-8') as f:
+                            report_content = f.read()
+                
+                # Prepare response
+                response_data = {
+                    'status': 'success',
+                    'timestamp': datetime.datetime.now().isoformat(),
+                    'execution_time': datetime.datetime.now(est).strftime('%Y-%m-%d %H:%M:%S %Z'),
+                    'script_url': script_url,
+                    'script_output': result.stdout,
+                    'expected_filename': expected_filename,
+                    'server_info': {
+                        'platform': 'Render',
+                        'timezone': 'Eastern Standard Time',
+                        'temp_directory': temp_dir,
+                        'files_created': [f.name for f in temp_files]
+                    }
+                }
+                
+                if report_content:
+                    response_data.update({
+                        'report_found': True,
+                        'report_filename': report_filename,
+                        'report_content': report_content,
+                        'report_size': len(report_content),
+                        'report_lines': len(report_content.splitlines())
+                    })
+                else:
+                    response_data.update({
+                        'report_found': False,
+                        'message': f'No line movement report file found. Expected: {expected_filename}',
+                        'files_in_directory': [f.name for f in Path(temp_dir).iterdir()]
+                    })
+                
+                return jsonify(response_data)
+                
+            except subprocess.TimeoutExpired:
+                return jsonify({
+                    'status': 'error',
+                    'message': 'Script execution timeout (5 minutes)',
+                    'timestamp': datetime.datetime.now().isoformat()
+                }), 408
+            
+            except Exception as e:
+                return jsonify({
+                    'status': 'error',
+                    'message': f'Script execution error: {str(e)}',
+                    'timestamp': datetime.datetime.now().isoformat()
+                }), 500
+    
     except Exception as e:
         return jsonify({
             'status': 'error',
-            'message': f'Script execution failed: {str(e)}',
-            'timestamp': datetime.datetime.now().isoformat(),
-            'eastern_date': get_eastern_date()
-        }), 500
-
-@app.route('/api/read-report', methods=['GET'])
-def read_report_only():
-    """Endpoint to just read the existing report file without running script"""
-    try:
-        report_data = read_report_file()
-        
-        return jsonify({
-            'status': 'success',
-            'timestamp': datetime.datetime.now().isoformat(),
-            'eastern_date': get_eastern_date(),
-            'report_file': report_data
-        })
-        
-    except Exception as e:
-        return jsonify({
-            'status': 'error',
-            'message': f'Error reading report: {str(e)}',
+            'message': f'Unexpected error: {str(e)}',
             'timestamp': datetime.datetime.now().isoformat()
-        }), 500
-
-@app.route('/api/list-files', methods=['GET'])
-def list_files():
-    """List all files in the current directory for debugging"""
-    try:
-        files = []
-        for filename in os.listdir('.'):
-            if os.path.isfile(filename):
-                stat = os.stat(filename)
-                files.append({
-                    'name': filename,
-                    'size': stat.st_size,
-                    'modified': datetime.datetime.fromtimestamp(stat.st_mtime).isoformat()
-                })
-        
-        return jsonify({
-            'status': 'success',
-            'files': files,
-            'expected_report': get_report_filename(),
-            'current_directory': os.getcwd()
-        })
-        
-    except Exception as e:
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
         }), 500
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
+    est = pytz.timezone('US/Eastern')
+    current_time = datetime.datetime.now(est)
+    
     return jsonify({
         'status': 'healthy',
-        'service': 'Line Movement Script API',
+        'service': 'Line Movement Report API',
         'timestamp': datetime.datetime.now().isoformat(),
-        'timezone': 'US/Eastern',
-        'expected_report_filename': get_report_filename()
+        'eastern_time': current_time.strftime('%Y-%m-%d %H:%M:%S %Z'),
+        'expected_filename_today': f'line_movement_report_{current_time.strftime("%Y%m%d")}.txt',
+        'server_capabilities': [
+            'Python script execution',
+            'File output capture',
+            'Line movement report parsing',
+            'EST timezone support'
+        ]
     })
 
 if __name__ == '__main__':
