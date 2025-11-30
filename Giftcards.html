@@ -2,41 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gift Cards</title>
     <style>
-        body {
+        /* Reset some defaults */
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+        }
+
+        body {
             font-family: Arial, sans-serif;
             text-align: center;
             background: url('https://images.unsplash.com/photo-1512389142860-9c449e58a543?auto=format&fit=crop&w=1400&q=80') 
                         no-repeat center center fixed;
             background-size: cover;
             color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
         .overlay {
             background: rgba(0, 0, 0, 0.55);
-            padding: 40px;
-            margin-top: 100px;
-            display: inline-block;
-            border-radius: 12px;
+            padding: 30px 20px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px; /* iPhone 11 width optimized */
         }
 
         h1 {
-            font-size: 32px;
+            font-size: 22px;
             margin-bottom: 25px;
+            line-height: 1.3;
         }
 
-        .btn {
+        .unique-gift-button {
             display: block;
-            width: 260px;
-            padding: 18px;
-            margin: 15px auto;
-            font-size: 20px;
+            width: 100%;
+            padding: 16px 0;
+            margin: 12px 0;
+            font-size: 18px;
             font-weight: bold;
             background: #ffffff;
             color: #000000;
-            border-radius: 10px;
+            border-radius: 12px;
             text-decoration: none;
             transition: 0.2s;
         }
+
+        .unique-gift-button:hover {
+            background: #e3e3e3;
+        }
+
+        @media (max-width: 414px) {
+            h1 {
+                font-size: 20px;
+            }
+
+            .unique-gift-button {
+                font-size: 17px;
+                padding: 14px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay">
+    <h1>Gift cards for anyone to celebrate the start of December — first come, first served!</h1>
+
+    <a id="giftCardStarbucks_2025_11_30_unique" class="unique-gift-button" 
+       href="https://starbucks.cashstar.com/gift-card/view/yrCgIEYohtA6lHbNKbJKPp5Fu/2vVmwG/" 
+       target="_blank">
+        Starbucks Holiday Gift Card – First Serve 2025
+    </a>
+
+    <a id="giftCardSubway_2025_11_30_unique" class="unique-gift-button" 
+       href="https://mandrillapp.com/track/click/30351795/suuousbat.claim.cards?p=eyJzIjoiMS10NkRTZUE0bllFSkQtdy1sSjU0ZmJDWExnIiwidiI6MiwicCI6IntcInVcIjozMDM1MTc5NSxcInZcIjoyLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL3N1dW91c2JhdC5jbGFpbS5jYXJkc1xcXC94WUVrblA2TXB6UDZZNjZTQXlqTldCbUE_bD1lbl9VU1wiLFwiaWRcIjpcIjcxMmQyZDI3ZTEyZTQ2YTY4MDQ1YWJmMGEzZDZjOTY0XCIsXCJ1cmxfaWRzXCI6W1wiNzBlOTE5N2U0ODgyZTNjYWMwMzk2NzVhODU0YTBlZjRjMmVlNmFlOFwiXSxcIm1zZ190c1wiOjE3NjQ1MzM5OTV9In0" 
+       target="_blank">
+        Subway Holiday Gift Card – First Serve 2025
+    </a>
+</div>
+
+</body>
+</html>
