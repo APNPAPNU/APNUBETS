@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starbucks Gift Card</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: #f2f2f2;
+    color: #1e3932;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 100px auto;
+    background-color: #ffffff;
+    border: 3px solid #00704a;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  h1 {
+    color: #00704a;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    font-size: 1em;
+    width: 60%;
+    border: 2px solid #00704a;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #00704a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #005f39;
+  }
+
+  #image-container {
+    display: none;
+    margin-top: 30px;
+  }
+
+  #image-container img {
+    max-width: 100%;
+    border-radius: 10px;
+    border: 2px solid #00704a;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🎁 Starbucks Gift Card 🎁</h1>
+  <p>Answer the question below to unlock your gift card:</p>
+  <p><strong>Name of our favorite dog?</strong></p>
+  
+  <input type="text" id="answer" placeholder="Your answer here">
+  <button onclick="checkAnswer()">Unlock</button>
+
+  <div id="image-container">
+    <img src="starbucks-giftcard.jpg" alt="Starbucks Gift Card">
+    <p>Enjoy your Starbucks gift! ☕</p>
+  </div>
+</div>
+
+<script>
+function checkAnswer() {
+  const input = document.getElementById('answer').value.trim().toLowerCase();
+  if(input === 'charlie') {
+    document.getElementById('image-container').style.display = 'block';
+  } else {
+    alert('Incorrect! Try again.');
+  }
+}
+</script>
+
+</body>
+</html>
